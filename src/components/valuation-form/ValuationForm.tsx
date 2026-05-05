@@ -177,7 +177,7 @@ export default function ValuationForm({
                             const data = res.data.data;
                             setCache(cacheKey, data);
                             data.slice(0, 5).forEach((m: any) =>
-                                bgFetch(`/models?make_id=${m.id}&year=${yearStr}`, `models_${m.id}_yearStr`)
+                                bgFetch(`/models?make_id=${m.id}&year=${yearStr}`, `models_${m.id}_${yearStr}`)
                             );
                             return data;
                         });
@@ -187,12 +187,20 @@ export default function ValuationForm({
             });
         }
 
-        // FULL CATALOG SYNC: The ultimate 0ms strategy
-        // This persists the entire database locally so refreshes are 100% instant
+        // FULL CATALOG SYNC: persists the entire catalog locally for 0ms refreshes.
+        // Skip localStorage when the payload exceeds 4MB (production with large data sets
+        // would silently fail the write and the form would fall back to API on every reload).
         if (!globalCatalog) {
             api.get('/catalog-sync').then(res => {
                 globalCatalog = res.data.data;
-                localStorage.setItem('gv_catalog_v1', JSON.stringify(globalCatalog));
+                try {
+                    const serialized = JSON.stringify(globalCatalog);
+                    if (serialized.length < 4 * 1024 * 1024) {
+                        localStorage.setItem('gv_catalog_v1', serialized);
+                    }
+                } catch {
+                    // quota exceeded — keep in memory only, form still works via memCache
+                }
             }).catch(() => {});
         }
 

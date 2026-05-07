@@ -432,6 +432,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   padding-right: 0;
 }
 
+/* ─── Blog TOC anchor offset (accounts for sticky navbar) ───── */
+.blog-prose h2[id],
+.blog-prose h3[id],
+.blog-prose h4[id],
+.blog-prose h5[id],
+.blog-prose h6[id] {
+  scroll-margin-top: 5rem;
+}
+
 /* ─── Blog Rich Content Rendering ────────────────────────────── */
 .blog-prose img {
   max-width: 100%;

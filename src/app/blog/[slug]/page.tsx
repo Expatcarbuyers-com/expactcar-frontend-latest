@@ -2,6 +2,8 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Calendar, ChevronLeft, Star } from 'lucide-react';
 import { serverFetch } from '@/lib/serverApi';
+import TableOfContents from '@/components/blog/TableOfContents';
+import { injectHeadingIds } from '@/lib/blogUtils';
 
 export const revalidate = 3600;
 
@@ -49,6 +51,7 @@ export default async function BlogDetailPage({
 
     let post: any = null;
     let related: any[] = [];
+    let processedContent = '';
 
     try {
         const [postRes, relatedRes] = await Promise.all([
@@ -57,6 +60,7 @@ export default async function BlogDetailPage({
         ]);
         post = postRes.data;
         related = (relatedRes.data.data ?? []).filter((p: any) => p.slug !== slug);
+        processedContent = injectHeadingIds(post.content ?? '', post.outline ?? []);
     } catch {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -129,6 +133,7 @@ export default async function BlogDetailPage({
                                     <img src={post.cover_image} alt={post.title} className="w-full h-auto" />
                                 </div>
                             )}
+                            <TableOfContents outline={post.outline ?? []} />
                             <div
                                 className="blog-prose prose prose-lg lg:prose-xl max-w-none
                                     prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-gray-900
@@ -140,7 +145,7 @@ export default async function BlogDetailPage({
                                     prose-code:text-[#f24026] prose-code:bg-[#FCF5F2] prose-code:px-1 prose-code:rounded
                                     prose-pre:bg-gray-900 prose-pre:text-gray-100
                                     prose-li:text-gray-600"
-                                dangerouslySetInnerHTML={{ __html: post.content }}
+                                dangerouslySetInnerHTML={{ __html: processedContent }}
                             />
                         </div>
 

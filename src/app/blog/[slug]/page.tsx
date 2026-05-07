@@ -130,7 +130,16 @@ export default async function BlogDetailPage({
                                 </div>
                             )}
                             <div
-                                className="prose prose-lg lg:prose-xl max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-img:rounded-3xl prose-p:leading-relaxed prose-p:text-gray-600"
+                                className="blog-prose prose prose-lg lg:prose-xl max-w-none
+                                    prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-gray-900
+                                    prose-p:leading-relaxed prose-p:text-gray-600
+                                    prose-img:rounded-3xl prose-img:mx-auto prose-img:shadow-lg
+                                    prose-a:text-[#f24026] prose-a:no-underline hover:prose-a:underline
+                                    prose-strong:text-gray-900
+                                    prose-blockquote:border-[#f24026] prose-blockquote:text-gray-600
+                                    prose-code:text-[#f24026] prose-code:bg-[#FCF5F2] prose-code:px-1 prose-code:rounded
+                                    prose-pre:bg-gray-900 prose-pre:text-gray-100
+                                    prose-li:text-gray-600"
                                 dangerouslySetInnerHTML={{ __html: post.content }}
                             />
                         </div>

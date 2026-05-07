@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* ═══════════════════════════════════════════════════════════════
    ExpatCarBuyers — Brand Theme
@@ -429,4 +430,66 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 
 .inrwekeepcontentwrap {
   padding-right: 0;
+}
+
+/* ─── Blog Rich Content Rendering ────────────────────────────── */
+.blog-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  margin: 2rem auto;
+  display: block;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+}
+
+.blog-prose figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.blog-prose figure img {
+  margin: 0 auto 0.75rem;
+}
+
+.blog-prose figcaption {
+  font-size: 0.875rem;
+  color: #626161;
+  font-style: italic;
+}
+
+/* Responsive video/iframe embeds */
+.blog-prose iframe {
+  max-width: 100%;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  display: block;
+}
+
+.blog-prose .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin: 2rem 0;
+  background: #f3f4f6;
+}
+
+.blog-prose .video-wrapper iframe,
+.blog-prose .video-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 1rem;
+  margin: 0;
+}
+
+.blog-prose video {
+  max-width: 100%;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  display: block;
 }

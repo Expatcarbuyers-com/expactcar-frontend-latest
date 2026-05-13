@@ -11,6 +11,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
         { url: `${BASE_URL}/about-us`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
         { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+        { url: `${BASE_URL}/car-valuation`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${BASE_URL}/sell-car-abu-dhabi`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${BASE_URL}/sell-car-sharjah`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     ];
 
     // Makes → /sell-my-{make-slug}  +  Models → /sell-my-{make-slug}-{model-slug}

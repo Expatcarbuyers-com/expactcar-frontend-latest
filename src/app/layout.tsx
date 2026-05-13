@@ -9,6 +9,9 @@ import Footer from "@/components/layout/Footer";
 export const metadata: Metadata = {
     title: "ExpatCarBuyers | Sell Your Car in 30 Minutes",
     description: "The fastest way to sell your car in Dubai & UAE. Instant valuation, cash in hand.",
+    icons: {
+        icon: "/favicon.png",
+    },
 };
 
 export default function RootLayout({

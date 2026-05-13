@@ -121,9 +121,9 @@ export default function Footer() {
                                 <ul className="space-y-2">
                                     {[
                                         { label: 'Home', href: '/' },
-                                        { label: 'Sell Car in Sharjah', href: '/sell-my-sharjah' },
-                                        { label: 'Sell Car in Abu Dhabi', href: '/sell-my-abu-dhabi' },
-                                        { label: 'Evaluate My Car', href: '/evaluate-my-car' },
+                                        { label: 'Sell Car in Sharjah', href: '/sell-car-sharjah' },
+                                        { label: 'Sell Car in Abu Dhabi', href: '/sell-car-abu-dhabi' },
+                                        { label: 'Evaluate My Car', href: '/car-valuation' },
                                         { label: 'Cash for Cars', href: '/cash-for-cars' },
                                         { label: 'We Buy Any Car', href: '/we-buy-any-car' },
                                         { label: 'About Us', href: '/about-us' },

@@ -31,18 +31,21 @@ export default function RootLayout({
 
                 {GA_MEASUREMENT_ID && (
                     <>
-                        <Script
-                            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-                            strategy="afterInteractive"
+                        {/* Kept as literal <script> tags (not next/script) so it appears
+                            in raw View Page Source exactly as Google's snippet, with no
+                            injected data-nscript attribute. */}
+                        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+                        <script
+                            dangerouslySetInnerHTML={{
+                                __html: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${GA_MEASUREMENT_ID}');
+`,
+                            }}
                         />
-                        <Script id="ga-init" strategy="afterInteractive">
-                            {`
-                                window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-                                gtag('config', '${GA_MEASUREMENT_ID}');
-                            `}
-                        </Script>
                     </>
                 )}
             </head>

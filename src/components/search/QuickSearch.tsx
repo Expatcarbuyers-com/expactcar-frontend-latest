@@ -129,9 +129,9 @@ export default function QuickSearch() {
                                         key={car.id}
                                         className="w-full flex items-center gap-4 p-4 hover:bg-[#FCF5F2] rounded-2xl text-left transition-colors group"
                                         onClick={() => {
-                                            const makeSlug = car.make.toLowerCase().replace(/\s+/g, '-');
-                                            const modelSlug = car.model.toLowerCase().replace(/\s+/g, '-');
-                                            window.location.href = `/sell-my-${makeSlug}-${modelSlug}`;
+                                            // Per-make/model landing pages (/sell-my-{make}-{model}) were
+                                            // removed — send the user to the valuation form instead.
+                                            window.location.href = `/car-valuation`;
                                             setIsOpen(false);
                                         }}
                                     >

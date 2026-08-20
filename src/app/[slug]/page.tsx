@@ -12,29 +12,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { slug: rawSlug } = await params;
     const slug = rawSlug.replace('sell-my-', '');
+
+    // notFound() throws internally to trigger the 404 page, so it must never
+    // be called from inside a try/catch that would swallow that throw.
+    let data: any;
     try {
         const res = await serverFetch(`/cars/${slug}`);
-        const { type, make, model, branch } = res.data;
-
-        if (type === 'make') {
-            return {
-                title: `Sell My ${make.name} in UAE | Instant Valuation`,
-                description: `Want to sell your ${make.name}? Get a free instant valuation for your ${make.name} in Dubai & UAE. Best prices, instant cash, 100% transparent.`,
-            };
-        }
-        if (type === 'location') {
-            return {
-                title: `Sell My Car in ${branch.name} | Instant Cash in 30 Minutes`,
-                description: `Looking to sell your car in ${branch.name}? We buy any car for cash. Free valuation, doorstep inspection, and instant payment today.`,
-            };
-        }
-        return {
-            title: `Sell My ${make.name} ${model.name} in UAE | Best Price Guaranteed`,
-            description: `Get the best price for your ${make.name} ${model.name} today. Instant online valuation, free doorstep inspection, and cash in hand in 30 minutes.`,
-        };
+        data = res.data;
     } catch {
         return { title: 'Sell My Car | ExpatCarBuyers' };
     }
+
+    // Make and model landing pages were removed at the client's request
+    // (low traffic, SEO/crawl-budget concerns). Only location pages remain.
+    if (data.type !== 'location') {
+        notFound();
+    }
+
+    return {
+        title: `Sell My Car in ${data.branch.name} | Instant Cash in 30 Minutes`,
+        description: `Looking to sell your car in ${data.branch.name}? We buy any car for cash. Free valuation, doorstep inspection, and instant payment today.`,
+    };
 }
 
 export default async function DynamicCarPage({
@@ -62,6 +60,12 @@ export default async function DynamicCarPage({
         const res = await serverFetch(`/cars/${slug}`);
         data = res.data;
     } catch {
+        notFound();
+    }
+
+    // Make and model landing pages were removed at the client's request
+    // (low traffic, SEO/crawl-budget concerns). Only location pages remain.
+    if (data.type !== 'location') {
         notFound();
     }
 

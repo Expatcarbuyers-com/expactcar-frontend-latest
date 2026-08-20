@@ -16,38 +16,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${BASE_URL}/sell-car-sharjah`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     ];
 
-    // Makes → /sell-my-{make-slug}  +  Models → /sell-my-{make-slug}-{model-slug}
-    let makes: any[] = [];
-    try {
-        const res = await serverFetch('/makes');
-        makes = res.data ?? [];
-        makes.forEach((make: any) => {
-            entries.push({
-                url: `${BASE_URL}/sell-my-${make.slug}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly',
-                priority: 0.9,
-            });
-        });
-    } catch { /* skip if API unavailable */ }
-
-    // /models requires a make_id — fetch per make
-    await Promise.all(
-        makes.map(async (make: any) => {
-            try {
-                const res = await serverFetch(`/models?make_id=${make.id}`);
-                const models: any[] = res.data ?? [];
-                models.forEach((model: any) => {
-                    entries.push({
-                        url: `${BASE_URL}/sell-my-${make.slug}-${model.slug}`,
-                        lastModified: new Date(),
-                        changeFrequency: 'weekly',
-                        priority: 0.8,
-                    });
-                });
-            } catch { /* skip individual make on error */ }
-        })
-    );
+    // Make and model landing pages (/sell-my-{make}[-{model}]) were removed at
+    // the client's request (low traffic, SEO/crawl-budget concerns) — no
+    // longer submitted here. Location pages below are unaffected.
 
     // Branches → /sell-my-car-in-{branch-slug}
     try {

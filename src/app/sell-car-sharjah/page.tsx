@@ -2,12 +2,25 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 import { ChevronDown } from 'lucide-react';
-import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
 
+const TITLE = 'Sell Any Car in Sharjah | Sell Your Car Across Sharjah in 30 Minutes';
+const DESCRIPTION = 'Sell any car in Sharjah to Expat Car Buyers and get market competitive cash deal for your used car. Sell your car in just 30 minutes and get instant payment.';
+
 export const metadata: Metadata = {
-    title: 'Sell Any Car in Sharjah | Sell Your Car Across Sharjah in 30 Minutes',
-    description: 'Do you want to sell your car fast in Sharjah? We can help you with it. Get a no-obligation quote and instant cash within 30 minutes.',
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: {
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
 };
 
 export default function SharjahPage() {
@@ -26,7 +39,7 @@ export default function SharjahPage() {
                                 Sell Fast in Sharjah
                             </span>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mb-6">
-                                Sell My Car in <br />
+                                Sell Your Car in <br />
                                 <span className="text-[#f24026]">Sharjah</span>
                             </h1>
                             <p className="text-lg text-gray-600 mb-10 max-w-lg leading-relaxed font-medium">
@@ -196,20 +209,6 @@ export default function SharjahPage() {
                 </div>
             </section>
 
-            {/* ══════════════════════════════════════════════
-                TESTIMONIALS SECTION (Full Width)
-            ══════════════════════════════════════════════ */}
-            <section className="py-24 bg-white border-t border-gray-100">
-                <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight italic uppercase">
-                            &ldquo;What people are saying in <span className="text-[#f24026]">Sharjah?</span>&rdquo;
-                        </h2>
-                        <div className="w-24 h-1 bg-[#f24026] mx-auto rounded-full" />
-                    </div>
-                    <TestimonialCarousel />
-                </div>
-            </section>
             {/* ══════════════════════════════════════════════
                 FAQ SECTION
             ══════════════════════════════════════════════ */}

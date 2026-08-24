@@ -1,11 +1,23 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
-import TestimonialCarousel from '@/components/home/TestimonialCarousel';
+const TITLE = 'Free Car Valuation in Dubai, UAE | Expat Car Buyers';
+const DESCRIPTION = 'Get a free, fast & accurate car valuation in Dubai, UAE—online or at your home. No obligations. Book now & get paid instantly with all paperwork done!';
 
 export const metadata: Metadata = {
-    title: 'Free Car Valuation UAE | How to Sell My Car in UAE',
-    description: 'Avoid the cons and find out what your car is really worth. Get a free professional car inspection and instant cash payment in UAE.',
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: {
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
 };
 
 export default function EvaluatePage() {
@@ -149,21 +161,6 @@ export default function EvaluatePage() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* ══════════════════════════════════════════════
-                TESTIMONIALS SECTION (Full Width)
-            ══════════════════════════════════════════════ */}
-            <section className="py-24 bg-white border-t border-gray-100">
-                <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight italic uppercase">
-                            &ldquo;Our Happy Customers&rdquo;
-                        </h2>
-                        <div className="w-24 h-1 bg-[#f24026] mx-auto rounded-full" />
-                    </div>
-                    <TestimonialCarousel />
                 </div>
             </section>
 

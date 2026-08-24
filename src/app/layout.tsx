@@ -6,11 +6,34 @@ import Providers from "@/components/Providers";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
+const SITE_URL = "https://www.expatcarbuyers.com";
+const DEFAULT_TITLE = "ExpatCarBuyers | Sell Your Car in 30 Minutes";
+const DEFAULT_DESCRIPTION = "The fastest way to sell your car in Dubai & UAE. Instant valuation, cash in hand.";
+
 export const metadata: Metadata = {
-    title: "ExpatCarBuyers | Sell Your Car in 30 Minutes",
-    description: "The fastest way to sell your car in Dubai & UAE. Instant valuation, cash in hand.",
+    metadataBase: new URL(SITE_URL),
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     icons: {
-        icon: "/favicon.png",
+        icon: "/favicon.webp",
+    },
+    // Sitewide defaults so every page has working OG/Twitter tags even before
+    // it sets its own — individual pages override title/description/openGraph
+    // as needed via their own metadata export.
+    openGraph: {
+        title: DEFAULT_TITLE,
+        description: DEFAULT_DESCRIPTION,
+        url: SITE_URL,
+        siteName: "ExpatCarBuyers",
+        images: ["/front/images/our-gurantee-right.webp"],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: DEFAULT_TITLE,
+        description: DEFAULT_DESCRIPTION,
+        images: ["/front/images/our-gurantee-right.webp"],
     },
 };
 

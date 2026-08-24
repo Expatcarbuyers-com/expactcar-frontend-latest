@@ -2,12 +2,25 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 import { ChevronDown } from 'lucide-react';
-import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
 
+const TITLE = 'Sell My Car in Abu Dhabi | Sell Any Car in Abu Dhabi in 30 Minutes';
+const DESCRIPTION = 'Sell any car in Abu Dhabi to Expat Car Buyers and get best cash deal for your used car. Sell your car in just 30 minutes and get instant payment.';
+
 export const metadata: Metadata = {
-    title: 'Sell My Car Abu Dhabi | Get Best Price for Your Used Car',
-    description: 'We Guarantee to Offer You the Highest Price in Abu Dhabi. Sell any car fast with 100% transparency and secure procedure.',
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: {
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
+    },
 };
 
 export default function AbuDhabiPage() {
@@ -26,7 +39,7 @@ export default function AbuDhabiPage() {
                                 Highest Price Guarantee
                             </span>
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mb-6">
-                                Sell My Car in <br />
+                                Sell Your Car in <br />
                                 <span className="text-[#f24026]">Abu Dhabi</span>
                             </h1>
                             <p className="text-lg text-gray-600 mb-10 max-w-lg leading-relaxed font-medium">
@@ -238,21 +251,6 @@ export default function AbuDhabiPage() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* ══════════════════════════════════════════════
-                TESTIMONIALS SECTION (Full Width)
-            ══════════════════════════════════════════════ */}
-            <section className="py-24 bg-white border-t border-gray-100">
-                <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight italic uppercase">
-                            &ldquo;Why should I choose Expat Car Buyers in <span className="text-[#f24026]">Abu Dhabi?</span>&rdquo;
-                        </h2>
-                        <div className="w-24 h-1 bg-[#f24026] mx-auto rounded-full" />
-                    </div>
-                    <TestimonialCarousel />
                 </div>
             </section>
 

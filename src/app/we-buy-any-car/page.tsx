@@ -2,7 +2,6 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 import FAQAccordion from '@/components/home/FAQAccordion';
-import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
 
 export const metadata: Metadata = {
@@ -191,20 +190,6 @@ export default function WeBuyAnyCarPage() {
                 </div>
             </section>
 
-            {/* ══════════════════════════════════════════════
-                TESTIMONIALS SECTION (Full Width)
-            ══════════════════════════════════════════════ */}
-            <section className="py-24 bg-white border-t border-gray-100">
-                <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight italic uppercase">
-                            &ldquo;What our clients say&rdquo;
-                        </h2>
-                        <div className="w-24 h-1 bg-[#f24026] mx-auto rounded-full" />
-                    </div>
-                    <TestimonialCarousel />
-                </div>
-            </section>
             {/* ══════════════════════════════════════════════
                 FAQ SECTION
             ══════════════════════════════════════════════ */}

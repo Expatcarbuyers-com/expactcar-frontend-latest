@@ -124,7 +124,7 @@ export default function Footer() {
                                         { label: 'Sell Car in Sharjah', href: '/sell-car-sharjah' },
                                         { label: 'Sell Car in Abu Dhabi', href: '/sell-car-abu-dhabi' },
                                         { label: 'Evaluate My Car', href: '/car-valuation' },
-                                        { label: 'Cash for Cars', href: '/cash-for-cars' },
+                                        { label: 'Cash for Any Car', href: '/we-cash-any-car' },
                                         { label: 'We Buy Any Car', href: '/we-buy-any-car' },
                                         { label: 'About Us', href: '/about-us' },
                                         { label: 'Blog', href: '/blog' },

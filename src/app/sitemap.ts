@@ -16,23 +16,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${BASE_URL}/sell-car-sharjah`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     ];
 
-    // Make and model landing pages (/sell-my-{make}[-{model}]) were removed at
-    // the client's request (low traffic, SEO/crawl-budget concerns) — no
-    // longer submitted here. Location pages below are unaffected.
-
-    // Branches → /sell-my-car-in-{branch-slug}
-    try {
-        const res = await serverFetch('/branches');
-        const branches: any[] = res.data ?? [];
-        branches.forEach((branch: any) => {
-            entries.push({
-                url: `${BASE_URL}/sell-my-car-in-${branch.slug}`,
-                lastModified: new Date(),
-                changeFrequency: 'monthly',
-                priority: 0.7,
-            });
-        });
-    } catch { /* skip */ }
+    // Make/model pages (/sell-my-{make}[-{model}]) and the database-driven
+    // branch pages (/sell-my-car-in-{branch-slug}) were both removed at the
+    // client's explicit request — the dynamic, database-driven page system
+    // was flagged as hurting SEO (thin/duplicate content). Only the two
+    // hand-built city pages remain: /sell-car-sharjah, /sell-car-abu-dhabi
+    // (listed above), which are static and unrelated to the branches table.
 
     // Blog posts → /blog/{slug}
     try {

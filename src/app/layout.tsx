@@ -37,8 +37,6 @@ export const metadata: Metadata = {
     },
 };
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -51,26 +49,12 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
                 <link rel="stylesheet" href="/font-awesome/css/all.min.css" />
-
-                {GA_MEASUREMENT_ID && (
-                    <>
-                        {/* Kept as literal <script> tags (not next/script) so it appears
-                            in raw View Page Source exactly as Google's snippet, with no
-                            injected data-nscript attribute. */}
-                        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-                        <script
-                            dangerouslySetInnerHTML={{
-                                __html: `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '${GA_MEASUREMENT_ID}');
-`,
-                            }}
-                        />
-                    </>
-                )}
+                {/* Google tag (gtag.js) is injected server-side in server.js, spliced
+                    in as raw text immediately after this <head> tag. React's renderer
+                    can't produce a byte-exact match of Google's snippet (it always
+                    quotes boolean attributes like async="" and interleaves its own
+                    <script> tags in <head>), so this is done below the framework
+                    entirely. Do not also add it here — see server.js. */}
             </head>
             <body className="antialiased" suppressHydrationWarning>
                 <Providers>

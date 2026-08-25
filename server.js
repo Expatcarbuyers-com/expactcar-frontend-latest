@@ -15,7 +15,12 @@ const handle = app.getRequestHandler();
 // so it's impossible to produce a byte-exact match of Google's snippet from
 // inside the app. Splicing it in here, after Next has already rendered the
 // page, is the only way to get the literal tag the client asked for.
-const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+// Hardcoded rather than read from process.env: unlike NEXT_PUBLIC_* vars used
+// inside the Next.js app (which get inlined into the build at `next build`
+// time), server.js runs as plain Node at runtime, and this host's process
+// manager does not pass that env var through to the running process — so
+// reading it here silently produced no tag at all in production.
+const GA_ID = 'G-DLRLFTBXBP';
 const GA_SNIPPET = GA_ID
   ? `<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>

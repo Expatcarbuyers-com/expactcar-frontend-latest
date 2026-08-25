@@ -18,7 +18,8 @@ import {
     Search,
     Copy,
     ClipboardCheck,
-    Clock
+    Clock,
+    ChevronDown
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import api from '@/lib/api';
@@ -532,13 +533,16 @@ export default function ValuationForm({
                                         <label className="text-sm font-medium text-gray-800 font-bold flex items-center gap-1.5">
                                             <Hash className="w-4 h-4 text-[#f24026]" /> Year
                                         </label>
-                                        <select
-                                            {...form.register('year')}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900"
-                                        >
-                                            <option value="">Select Year</option>
-                                            {years.map(y => <option key={y} value={y}>{y}</option>)}
-                                        </select>
+                                        <div className="relative">
+                                            <select
+                                                {...form.register('year')}
+                                                className="w-full appearance-none bg-gray-50 border border-gray-200 rounded-xl pl-4 pr-10 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 font-normal"
+                                            >
+                                                <option value="">Select Year</option>
+                                                {years.map(y => <option key={y} value={y}>{y}</option>)}
+                                            </select>
+                                            <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                        </div>
                                     </div>
 
                                     <div className="space-y-2">
@@ -556,11 +560,12 @@ export default function ValuationForm({
                                                         prefetchedOnFocus.current[`makes_${selectedYear}`] = true;
                                                     }
                                                 }}
-                                                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 disabled:opacity-60"
+                                                className="w-full appearance-none bg-gray-50 border border-gray-200 rounded-xl pl-4 pr-10 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 font-normal disabled:opacity-60"
                                             >
                                                 <option value="">Select Make</option>
                                                 {makes.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                                             </select>
+                                            <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                         </div>
                                     </div>
                                 </div>
@@ -580,11 +585,12 @@ export default function ValuationForm({
                                                     prefetchedOnFocus.current[`models_${selectedMake}`] = true;
                                                 }
                                             }}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 disabled:opacity-60"
+                                            className="w-full appearance-none bg-gray-50 border border-gray-200 rounded-xl pl-4 pr-10 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 font-normal disabled:opacity-60"
                                         >
                                             <option value="">Select Model</option>
                                             {models.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                                         </select>
+                                        <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                     </div>
                                 </div>
 
@@ -603,11 +609,12 @@ export default function ValuationForm({
                                                     prefetchedOnFocus.current[`variants_${selectedModel}`] = true;
                                                 }
                                             }}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 disabled:opacity-60"
+                                            className="w-full appearance-none bg-gray-50 border border-gray-200 rounded-xl pl-4 pr-10 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900 font-normal disabled:opacity-60"
                                         >
                                             <option value="">Select Variant</option>
                                             {variants.map(v => <option key={v.id} value={v.id}>{v.name} ({v.engine})</option>)}
                                         </select>
+                                        <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                     </div>
                                 </div>
                             </motion.div>

@@ -2,19 +2,25 @@
 
 import { useState } from 'react';
 import { MapPin, Phone, Mail, MessageCircle, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import api from '@/lib/api';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactPage() {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
-  const [errors, setErrors] = useState<{ name?: string; phone?: string; message?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string }>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const validate = () => {
     const e: typeof errors = {};
     if (!name.trim() || name.trim().length < 2) e.name = 'Please enter your full name';
-    if (!phone.trim() || phone.trim().length < 8) e.phone = 'Please enter a valid phone number';
+    if (!email.trim() || !EMAIL_RE.test(email.trim())) e.email = 'Please enter a valid email address';
+    if (phone.trim() && !/^\+?[0-9\s-]{7,20}$/.test(phone.trim())) e.phone = 'Please enter a valid phone number';
     if (!message.trim() || message.trim().length < 10) e.message = 'Please write at least 10 characters';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -22,19 +28,34 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitting(false);
-    setSuccess(true);
+    try {
+      await api.post('/contacts', {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim() || undefined,
+        message: message.trim(),
+      });
+      setSuccess(true);
+    } catch (err: any) {
+      setSubmitError(
+        err.response?.data?.message || 'Something went wrong sending your message. Please try again or WhatsApp us.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const reset = () => {
     setSuccess(false);
     setName('');
+    setEmail('');
     setPhone('');
     setMessage('');
     setErrors({});
+    setSubmitError(null);
   };
 
   const inputClass = (hasError: boolean) =>
@@ -230,7 +251,19 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 block">Phone Number</label>
+                    <label className="text-sm font-bold text-gray-700 block">Email Address</label>
+                    <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      type="email"
+                      className={inputClass(!!errors.email)}
+                    />
+                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-700 block">Phone Number <span className="text-gray-400 font-normal">(optional)</span></label>
                     <input
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -252,6 +285,12 @@ export default function ContactPage() {
                     />
                     {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>
+
+                  {submitError && (
+                    <p className="text-red-500 text-sm bg-red-50 border border-red-100 rounded-xl px-4 py-3">
+                      {submitError}
+                    </p>
+                  )}
 
                   <button
                     type="submit"

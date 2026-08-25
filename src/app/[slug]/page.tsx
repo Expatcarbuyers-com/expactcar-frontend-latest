@@ -5,26 +5,38 @@ import ValuationFormServer from '@/components/valuation-form/ValuationFormServer
 import { ShieldCheck, Zap, Banknote, MapPin, ChevronRight, Star, Info } from 'lucide-react';
 import { serverFetch } from '@/lib/serverApi';
 
+// The only URL format this route resolves is /sell-my-car-in-{branch-slug}
+// (this is also the only format sitemap.ts generates). Anything else
+// starting with "sell-my-" used to be a make/model page — those were
+// removed, so they 404. Bare /sell-my-{branch-slug} (no "car-in-") is
+// deliberately NOT resolved even though the backend's /cars/{slug} lookup
+// would happily match it — allowing that created an unintended duplicate
+// URL for every branch, alongside the canonical car-in- format.
+const LOCATION_PREFIX = 'sell-my-car-in-';
+
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug: rawSlug } = await params;
-    const slug = rawSlug.replace('sell-my-', '');
+
+    if (!rawSlug.startsWith(LOCATION_PREFIX)) {
+        return { title: 'Sell My Car | ExpatCarBuyers' };
+    }
+
+    const branchSlug = rawSlug.replace(LOCATION_PREFIX, '');
 
     // notFound() throws internally to trigger the 404 page, so it must never
     // be called from inside a try/catch that would swallow that throw.
     let data: any;
     try {
-        const res = await serverFetch(`/cars/${slug}`);
+        const res = await serverFetch(`/cars/${branchSlug}`);
         data = res.data;
     } catch {
         return { title: 'Sell My Car | ExpatCarBuyers' };
     }
 
-    // Make and model landing pages were removed at the client's request
-    // (low traffic, SEO/crawl-budget concerns). Only location pages remain.
     if (data.type !== 'location') {
         notFound();
     }
@@ -42,7 +54,7 @@ export default async function DynamicCarPage({
 }) {
     const { slug: rawSlug } = await params;
 
-    if (!rawSlug.startsWith('sell-my-')) {
+    if (!rawSlug.startsWith(LOCATION_PREFIX)) {
         // Check for a redirect entry before giving up
         try {
             const res = await serverFetch(`/redirects/${rawSlug}`);
@@ -53,18 +65,16 @@ export default async function DynamicCarPage({
         notFound();
     }
 
-    const slug = rawSlug.replace('sell-my-', '');
+    const branchSlug = rawSlug.replace(LOCATION_PREFIX, '');
 
     let data: any = null;
     try {
-        const res = await serverFetch(`/cars/${slug}`);
+        const res = await serverFetch(`/cars/${branchSlug}`);
         data = res.data;
     } catch {
         notFound();
     }
 
-    // Make and model landing pages were removed at the client's request
-    // (low traffic, SEO/crawl-budget concerns). Only location pages remain.
     if (data.type !== 'location') {
         notFound();
     }

@@ -733,29 +733,6 @@ export default function ValuationForm({
                                     />
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-800 font-bold">
-                                            Preferred Date
-                                        </label>
-                                        <input
-                                            type="date"
-                                            {...form.register('date')}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-800 font-bold flex items-center gap-1">
-                                            <Clock className="w-4 h-4 text-[#f24026]" /> Preferred Time
-                                        </label>
-                                        <input
-                                            type="time"
-                                            {...form.register('time')}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#f24026]/20 focus:border-[#f24026] transition text-gray-900"
-                                        />
-                                    </div>
-                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>

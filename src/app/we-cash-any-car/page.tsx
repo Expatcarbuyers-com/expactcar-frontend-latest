@@ -5,6 +5,9 @@ import ValuationFormServer from '@/components/valuation-form/ValuationFormServer
 export const metadata: Metadata = {
     title: 'Cash For Any Car Dubai | Instant Cash for Cars UAE',
     description: 'Cash Your Car in Dubai, Sharjah and Abu-Dhabi with The Highest No-obligation Price. We Cash Any Car in 30 Minutes regardless of condition.',
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/we-cash-any-car',
+    },
 };
 
 export default function WeCashAnyCarPage() {

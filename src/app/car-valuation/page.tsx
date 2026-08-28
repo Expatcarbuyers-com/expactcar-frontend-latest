@@ -7,6 +7,9 @@ const DESCRIPTION = 'Get a free, fast & accurate car valuation in Dubai, UAE—o
 export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/car-valuation',
+    },
     openGraph: {
         title: TITLE,
         description: DESCRIPTION,

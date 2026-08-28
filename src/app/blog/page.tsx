@@ -9,6 +9,9 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
     title: 'Car Buying Guide & News | ExpatCarBuyers Blog',
     description: 'Stay updated with the latest car trends, selling tips, and market news in UAE. Your ultimate guide to selling cars in Dubai.',
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/blog',
+    },
 };
 
 interface SearchParams {

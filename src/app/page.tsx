@@ -9,6 +9,9 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
     title: 'Sell Any Car in UAE | Instant Cash Valuation | ExpatCarBuyers',
     description: 'Sell your car in the UAE hassle-free. Free professional inspection, instant cash in 30 minutes. Serving Dubai, Abu Dhabi & Sharjah.',
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/',
+    },
 };
 
 const organizationSchema = {

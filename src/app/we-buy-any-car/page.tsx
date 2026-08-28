@@ -7,6 +7,9 @@ import PriceIncludedSection from '@/components/PriceIncludedSection';
 export const metadata: Metadata = {
     title: 'We Buy Any Car Dubai | Best Car Buyer in UAE',
     description: 'We Buy Any Car in Dubai, UAE, Sharjah and Abu Dhabi. Get the highest price as per market and instant cash payment.',
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/we-buy-any-car',
+    },
 };
 
 export default function WeBuyAnyCarPage() {

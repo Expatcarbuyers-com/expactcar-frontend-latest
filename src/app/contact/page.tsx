@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, MessageCircle, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import api from '@/lib/api';
+import { executeRecaptcha } from '@/lib/recaptcha';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -32,11 +33,13 @@ export default function ContactPage() {
     if (!validate()) return;
     setSubmitting(true);
     try {
+      const recaptchaToken = await executeRecaptcha('contact_submit');
       await api.post('/contacts', {
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim() || undefined,
         message: message.trim(),
+        ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
       });
       setSuccess(true);
     } catch (err: any) {

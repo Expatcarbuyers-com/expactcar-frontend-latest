@@ -1,7 +1,12 @@
-export const metadata = {
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
   title: 'Privacy Policy | ExpatCarBuyers',
   description: 'Learn how ExpatCarBuyers collects, uses, and protects your personal data.',
-}
+  alternates: {
+    canonical: 'https://www.expatcarbuyers.com/privacy-policy',
+  },
+};
 
 export default function PrivacyPage() {
   return (

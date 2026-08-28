@@ -1,9 +1,13 @@
+import type { Metadata } from 'next';
 import { Target, Users, ShieldCheck, Heart } from 'lucide-react';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'About ExpatCarBuyers | The Trusted Way to Sell Your Car in UAE',
   description: 'Learn about ExpatCarBuyers, the leading car buying service in Dubai & UAE. Our mission is to provide the fastest, safest, and most transparent car selling experience.',
-}
+  alternates: {
+    canonical: 'https://www.expatcarbuyers.com/about-us',
+  },
+};
 
 const stats = [
   { label: 'Cars Bought', value: '15,000+' },

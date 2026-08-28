@@ -10,6 +10,9 @@ const DESCRIPTION = 'Sell any car in Abu Dhabi to Expat Car Buyers and get best 
 export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/sell-car-abu-dhabi',
+    },
     openGraph: {
         title: TITLE,
         description: DESCRIPTION,

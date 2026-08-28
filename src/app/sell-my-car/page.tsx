@@ -6,6 +6,9 @@ import FAQAccordion from '@/components/home/FAQAccordion';
 export const metadata: Metadata = {
     title: 'Sell My Car in Dubai | Get Cash in 30 Minutes | ExpatCarBuyers',
     description: 'Sell any car in Dubai safely, easily, and quickly at the best possible price. Free vehicle valuation and instant cash payment in under 30 minutes.',
+    alternates: {
+        canonical: 'https://www.expatcarbuyers.com/sell-my-car',
+    },
 };
 
 export default function SellMyCarDubaiPage() {

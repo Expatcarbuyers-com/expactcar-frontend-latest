@@ -24,6 +24,7 @@ import {
 import { cn } from '@/lib/utils';
 import api from '@/lib/api';
 import { usePathname } from 'next/navigation';
+import { executeRecaptcha } from '@/lib/recaptcha';
 
 const formSchema = z.object({
     year: z.string().min(1, "Year is required"),
@@ -424,8 +425,10 @@ export default function ValuationForm({
         setSubmitting(true);
         setError(null);
         try {
+            const recaptchaToken = await executeRecaptcha('valuation_submit');
             const res = await api.post('/bookings', {
                 ...data,
+                ...(recaptchaToken ? { recaptcha_token: recaptchaToken } : {}),
                 ...(Object.keys(utmData).length ? { utm_data: utmData } : {}),
             });
             setSuccess(true);

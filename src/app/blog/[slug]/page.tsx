@@ -29,6 +29,9 @@ export async function generateMetadata({
         return {
             title: `${post.title} | ExpatCarBuyers Blog`,
             description: post.excerpt || post.title,
+            alternates: {
+                canonical: `https://www.expatcarbuyers.com/blog/${slug}`,
+            },
             openGraph: {
                 title: post.title,
                 description: post.excerpt || post.title,

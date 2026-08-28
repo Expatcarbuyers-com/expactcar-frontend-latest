@@ -1,7 +1,12 @@
-export const metadata = {
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
   title: 'Terms & Conditions | ExpatCarBuyers',
   description: 'Read the terms and conditions for using the ExpatCarBuyers car valuation and buying service.',
-}
+  alternates: {
+    canonical: 'https://www.expatcarbuyers.com/terms-conditions',
+  },
+};
 
 export default function TermsPage() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MessageCircle, MapPin, Clock, ShieldCheck, Car, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MessageCircle, MapPin, Clock, ShieldCheck, Car, ArrowRight, ExternalLink } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -15,9 +15,10 @@ export default function ContactPage() {
             telephone: '+971561774555',
             email: 'info@expatcarbuyers.com',
             url: 'https://www.expatcarbuyers.com',
+            hasMap: 'https://maps.app.goo.gl/J5k4P5uhxXGvBzzA7',
             address: {
               '@type': 'PostalAddress',
-              streetAddress: 'Sheikh Zayed Road',
+              streetAddress: 'Sheikh Zayed Road, Al Quoz',
               addressLocality: 'Dubai',
               addressCountry: 'AE',
             },
@@ -51,7 +52,7 @@ export default function ContactPage() {
             Contact <span className="text-[#f24026]">ExpatCarBuyers</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Ready to sell your car or have questions? Get in touch directly with our vehicle purchasing specialists across Dubai, Abu Dhabi, and Sharjah.
+            Ready to sell your car or have questions? Get in touch directly with our vehicle purchasing specialists in Dubai.
           </p>
         </div>
       </section>
@@ -138,7 +139,7 @@ export default function ContactPage() {
                 Want to know your car's valuation right now?
               </h2>
               <p className="text-gray-300 text-base sm:text-lg">
-                Enter your car make, model, and year to get an instant estimate and book a free door-step inspection anywhere in the UAE.
+                Enter your car make, model, and year to get an instant estimate and book a free door-step inspection in Dubai.
               </p>
             </div>
             <Link
@@ -157,41 +158,46 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div>
               <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-4">
-                Visit Our Inspection Centers
+                Visit Our Inspection Site
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                We operate across the UAE with mobile inspection vans and physical drop-off points. Our team can also inspect your car directly at your doorstep or office.
+                Drive to our dedicated physical inspection center in Dubai or book our mobile team to inspect your vehicle directly at your home or office.
               </p>
             </div>
 
             <div className="space-y-4">
-              <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex items-start gap-4">
-                <div className="w-10 h-10 bg-white rounded-xl shadow-sm text-[#f24026] flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+              {/* Primary Inspection Site Card */}
+              <div className="p-6 bg-[#FCF5F2] rounded-2xl border-2 border-[#f24026]/20 flex items-start gap-4">
+                <div className="w-12 h-12 bg-[#f24026] text-white rounded-xl shadow-sm flex items-center justify-center shrink-0">
+                  <MapPin className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Dubai Main Branch</h4>
-                  <p className="text-sm text-gray-600 mt-1">Sheikh Zayed Road, Al Quoz / Al Barsha Area, Dubai, UAE</p>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-extrabold text-gray-900 text-lg">Inspection Site</h4>
+                    <span className="bg-[#f24026] text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">Main</span>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-800 mt-1">Expat Car Buyers - Sell any car</p>
+                  <p className="text-sm text-gray-600">Sheikh Zayed Road, Al Quoz Industrial Area, Dubai, UAE</p>
+                  <a
+                    href="https://maps.app.goo.gl/J5k4P5uhxXGvBzzA7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#f24026] hover:underline mt-2"
+                  >
+                    <span>View on Google Maps</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
               </div>
 
+              {/* Mobile Service Card */}
               <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex items-start gap-4">
                 <div className="w-10 h-10 bg-white rounded-xl shadow-sm text-[#f24026] flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+                  <Car className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Abu Dhabi Mobile & Center</h4>
-                  <p className="text-sm text-gray-600 mt-1">Serving all residential and commercial districts across Abu Dhabi</p>
-                </div>
-              </div>
-
-              <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex items-start gap-4">
-                <div className="w-10 h-10 bg-white rounded-xl shadow-sm text-[#f24026] flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Sharjah & Northern Emirates</h4>
-                  <p className="text-sm text-gray-600 mt-1">On-site vehicle valuation and instant cash handover in Sharjah</p>
+                  <h4 className="font-bold text-gray-900">Doorstep Mobile Inspection</h4>
+                  <p className="text-sm text-gray-600 mt-1">Free at-home or at-office car inspection and instant payment anywhere in Dubai</p>
                 </div>
               </div>
             </div>
@@ -214,18 +220,18 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Map Embed */}
+          {/* Map Embed Pinpointing the exact Inspection Site */}
           <div className="h-[450px] lg:h-[500px] w-full rounded-[2.5rem] overflow-hidden border border-gray-200 shadow-xl relative">
             <iframe
-              title="ExpatCarBuyers Dubai Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115598.0583196942!2d55.15545864387807!3d25.13289053355523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
+              title="Expat Car Buyers - Sell any car Inspection Site Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.423985397441!2d55.21786357595393!3d25.11158717776495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b44e5d599e5%3A0x5ef0fe7dd34ca4bc!2sExpat%20Car%20Buyers%20-%20Sell%20any%20car!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full"
             />
           </div>
         </div>

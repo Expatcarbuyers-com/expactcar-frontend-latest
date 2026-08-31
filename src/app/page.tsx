@@ -38,8 +38,8 @@ const organizationSchema = {
     name: 'ExpatCarBuyers',
     url: 'https://www.expatcarbuyers.com',
     logo: 'https://www.expatcarbuyers.com/front/images/logo.png',
-    description: 'We buy any car in the UAE — instant valuation, free inspection, cash in 30 minutes.',
-    areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah'],
+    description: 'We buy any car in Dubai — instant valuation, free inspection, cash in 30 minutes.',
+    areaServed: ['Dubai'],
     telephone: '+971561774555',
     email: 'contact@expatcarbuyers.com',
     address: {
@@ -77,7 +77,7 @@ const howItWorks = [
             </svg>
         ),
         title: 'Book an Appointment',
-        desc: 'Let us know a time that works best for you and book an appointment for a vehicle inspection at your convenience. Book online here or visit our central offices in Dubai, Abu Dhabi, or Sharjah.',
+        desc: 'Let us know a time that works best for you and book an appointment for a vehicle inspection at your convenience. Book online here or visit our central office in Dubai.',
     },
     {
         icon: (
@@ -104,7 +104,7 @@ const howItWorks = [
             </svg>
         ),
         title: "Happy with the price? Get Paid!",
-        desc: "Get paid. If you are happy with the offer that we make you, simply give us a thumbs up and we will put the cash right in your hand there and then! It has never been easier to sell any car in UAE!",
+        desc: "Get paid. If you are happy with the offer that we make you, simply give us a thumbs up and we will put the cash right in your hand there and then! It has never been easier to sell any car in Dubai!",
     },
 ];
 
@@ -141,10 +141,10 @@ export default function Home() {
                 <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-8">
                     <div className="text-center max-w-4xl mx-auto">
                         <h1 className="text-3xl md:text-5xl lg:text-[3.25rem] font-extrabold text-gray-900 mb-6 leading-tight wow fadeInDown" data-wow-delay="0.15s">
-                            Sell Any Car in UAE with <span className="text-[#f24026]">Expat Car Buyers</span> — Quick, Easy & Hassle-Free
+                            Sell Any Car in Dubai with <span className="text-[#f24026]">Expat Car Buyers</span> — Quick, Easy & Hassle-Free
                         </h1>
                         <p className="text-lg md:text-xl text-[#606568] max-w-3xl mx-auto mb-10 leading-relaxed wow fadeInUp" data-wow-delay="0.3s">
-                            Looking to sell your car in <span className="font-bold text-gray-900">Sharjah or Abu Dhabi</span> quickly and without hassle? We make it incredibly easy to sell any car online — from the comfort of your home or office. Get an instant valuation today!
+                            Looking to sell your car in <span className="font-bold text-gray-900">Dubai, UAE</span> quickly and without hassle? We make it incredibly easy to sell any car online — from the comfort of your home or office. Get an instant valuation today!
                         </p>
                         <div className="bg-white rounded-[2rem] shadow-2xl p-4 md:p-6 max-w-2xl mx-auto border border-gray-100">
                             <ValuationFormServer />
@@ -165,7 +165,7 @@ export default function Home() {
                 <div className="max-w-6xl mx-auto px-4 md:px-8">
                     <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-3 wow fadeIn">
                         Sounds great, but{' '}
-                        <span className="text-[#f24026]">how do I sell my car in UAE?</span>
+                        <span className="text-[#f24026]">how do I sell my car in Dubai?</span>
                     </h2>
                     <p className="text-center text-[#626161] mb-12 max-w-xl mx-auto">
                         Our simple 4-step process gets you cash in hand in as little as 30 minutes.
@@ -198,13 +198,13 @@ export default function Home() {
                         </h2>
                         <div className="space-y-3 text-[#626161] text-[0.9375rem] leading-relaxed">
                             <p>Our core principles are transparency and fairness. We don&apos;t hide behind a big corporate office thousands of miles away, we are right with you on the ground helping you to make your sale.</p>
-                            <p>We strive to become your reliable partner in dealing with your used car as our mission is to provide confidence to any person that wants to sell any car in UAE.</p>
+                            <p>We strive to become your reliable partner in dealing with your used car as our mission is to provide confidence to any person that wants to sell any car in Dubai.</p>
                             <p>Our processes are clear and they never differentiate from what we say. You can expect the same 5★ treatment every time from us. It doesn&apos;t matter if you are selling us a brand-new Porsche or a beaten-up car that has seen better days, providing out of this world service to every client is what we do.</p>
-                            <p>There are no sneaky tricks, unforeseen costs or blackhat tactics if you trust us to sell used car in UAE with us. Once we have carried out our professional inspection, we offer you a fair price based on what we find and in line with the market.</p>
+                            <p>There are no sneaky tricks, unforeseen costs or blackhat tactics if you trust us to sell used car in Dubai with us. Once we have carried out our professional inspection, we offer you a fair price based on what we find and in line with the market.</p>
                         </div>
 
                         <h2 className="text-xl md:text-2xl font-bold text-gray-900 mt-8 mb-4">
-                            I Want to Sell My Car in UAE While Avoiding the Lowball Bidders and Tyre Kickers.{' '}
+                            I Want to Sell My Car in Dubai While Avoiding the Lowball Bidders and Tyre Kickers.{' '}
                             <span className="text-[#f24026]">Perfect, You Are in The Right Place for That!</span>
                         </h2>
                         <div className="space-y-3 text-[#626161] text-[0.9375rem] leading-relaxed">
@@ -219,7 +219,7 @@ export default function Home() {
                         </h2>
                         <div className="space-y-3 text-[#626161] text-[0.9375rem] leading-relaxed">
                             <p>Absolutely, no problem. It does not matter if your car has just rolled off the production line and you can still see your reflection in the fresh paint or it has done 10 laps of the globe and has a door missing.</p>
-                            <p>There is no better way to get the right amount of money for your car with the least amount of headache possible to sell car in UAE with Expat Car Buyers.</p>
+                            <p>There is no better way to get the right amount of money for your car with the least amount of headache possible to sell car in Dubai with Expat Car Buyers.</p>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@ export default function Home() {
                                 We guarantee that when you sell any car with us, you will be 100% satisfied with our service. We cut no corners, are always upfront and go the extra mile for our clients. Every. Single. Time.
                             </p>
                             <p className="text-[#f24026] font-bold mb-5">
-                                Here is what you can expect when you come to the best place to sell car in UAE:
+                                Here is what you can expect when you come to the best place to sell car in Dubai:
                             </p>
                             <ul className="guarantee-list">
                                 {guaranteeItems.map(item => (
@@ -253,7 +253,7 @@ export default function Home() {
                         <div className="flex-1 text-center wow fadeInRight">
                             <img
                                 src="/front/images/Illustration-red.png"
-                                alt="Sell my car UAE"
+                                alt="Sell my car Dubai"
                                 className="max-w-xs md:max-w-sm w-full mx-auto"
                             />
                         </div>
@@ -267,14 +267,14 @@ export default function Home() {
             <section className="text-image-section">
                 <div className="text-image-inner">
                     <div className="text-image-text">
-                        <h2 className="text-2xl md:text-3xl font-bold">What makes us the best place to sell used car in UAE?</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold">What makes us the best place to sell used car in Dubai?</h2>
                         <ul>
-                            <li>We strive for excellence in every single aspect of our business. And it shows in the service we are able to provide to our clients. When selling your car in UAE, there are a mountain of reasons to sell with us.</li>
+                            <li>We strive for excellence in every single aspect of our business. And it shows in the service we are able to provide to our clients. When selling your car in Dubai, there are a mountain of reasons to sell with us.</li>
                             <li>We will never be beaten on price. You can take your car to every dealership in the country but we can guarantee that none will be able to offer you as much cash as we will.</li>
                             <li>We do all the heavy lifting for you. No paperwork. No admin. No burned hours dealing with time wasters. Just sit back and let us take care of everything while you simply get paid the most money possible for your car.</li>
                             <li>Our inspection process is totally free of charge. Bring your car in for inspection and decide not to sell to us? That is absolutely fine. All of our inspections are carried out at our cost totally free of charge to our clients.</li>
                             <li>No pushing to make the sale. Unlike many other dealers we will never try to push or manipulate to sell to us. The choice is completely yours.</li>
-                            <li>Headache free sale. Dealing with private buyers can be a painful process. When selling with us, there is none of this nonsense. We take all the stress out of the process and make it 100% stress free to sell your car in UAE.</li>
+                            <li>Headache free sale. Dealing with private buyers can be a painful process. When selling with us, there is none of this nonsense. We take all the stress out of the process and make it 100% stress free to sell your car in Dubai.</li>
                         </ul>
                     </div>
                     <div
@@ -326,10 +326,10 @@ export default function Home() {
             <section className="text-image-section">
                 <div className="text-image-inner">
                     <div className="text-image-text">
-                        <h3 className="text-2xl md:text-3xl font-bold">We are one of the most trusted dealers in the UAE for good reason</h3>
+                        <h3 className="text-2xl md:text-3xl font-bold">We are one of the most trusted dealers in Dubai for good reason</h3>
                         <p><strong>Cost free valuation:</strong> We take the cost of the valuation of your car as our own expense. This means that you can come in and find out the true value of your car for 0 exchange of money. And don&apos;t worry, unlike some other companies, we will never try to guilt trip or force you into selling your car to us post inspection.</p>
                         <p><strong>Professionally Authorized:</strong> The RTA has officially recognised and authorized us to handle ownership transfer. This means that you do not have to give a second thought to dealing with this tricky and long-winded process yourself. Our in-house professionals will make the transfer for you totally stress free.</p>
-                        <p><strong>Settlement of outstanding finance:</strong> You may be wanting to sell used car in UAE but have outstanding finance agreements on it. This may be a problem for some dealers, but for us it is absolutely not. Simply bring your car in, we will settle the outstanding amount of finance and we will even pay you the difference!</p>
+                        <p><strong>Settlement of outstanding finance:</strong> You may be wanting to sell used car in Dubai but have outstanding finance agreements on it. This may be a problem for some dealers, but for us it is absolutely not. Simply bring your car in, we will settle the outstanding amount of finance and we will even pay you the difference!</p>
                         <p><strong>Instant payment:</strong> When you sell your car with us, we aim to make sure that you get your money within just 30 minutes of the sale. If this is cash in hand, bank transfer or cheque we can do them all, whatever works best for you!</p>
                     </div>
                     <div

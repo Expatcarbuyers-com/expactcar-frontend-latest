@@ -7,8 +7,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const SITE_URL = "https://www.expatcarbuyers.com";
-const DEFAULT_TITLE = "ExpatCarBuyers | Sell Your Car in 30 Minutes";
-const DEFAULT_DESCRIPTION = "The fastest way to sell your car in Dubai & UAE. Instant valuation, cash in hand.";
+const DEFAULT_TITLE = "Sell My Car in Dubai | Sell Any Car for Cash | ExpatCarBuyers";
+const DEFAULT_DESCRIPTION = "Sell my car in Dubai in 30 minutes. Free inspection, instant valuation, fair cash offer — no hidden fees. The UAE's trusted way to sell any car.";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),

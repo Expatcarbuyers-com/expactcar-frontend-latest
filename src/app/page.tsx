@@ -6,11 +6,29 @@ import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 
 export const revalidate = 3600;
 
+const TITLE = 'Sell My Car in Dubai | Sell Any Car for Cash | ExpatCarBuyers';
+const DESCRIPTION = "Sell my car in Dubai in 30 minutes. Free inspection, instant valuation, fair cash offer — no hidden fees. The UAE's trusted way to sell any car.";
+
 export const metadata: Metadata = {
-    title: 'Sell Any Car in UAE | Instant Cash Valuation | ExpatCarBuyers',
-    description: 'Sell your car in the UAE hassle-free. Free professional inspection, instant cash in 30 minutes. Serving Dubai, Abu Dhabi & Sharjah.',
+    title: TITLE,
+    description: DESCRIPTION,
     alternates: {
         canonical: 'https://www.expatcarbuyers.com/',
+    },
+    openGraph: {
+        title: TITLE,
+        description: DESCRIPTION,
+        url: 'https://www.expatcarbuyers.com/',
+        siteName: 'ExpatCarBuyers',
+        images: ['/front/images/our-gurantee-right.webp'],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: TITLE,
+        description: DESCRIPTION,
+        images: ['/front/images/our-gurantee-right.webp'],
     },
 };
 

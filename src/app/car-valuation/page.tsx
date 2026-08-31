@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
-const TITLE = 'Free Car Valuation in Dubai, UAE | Expat Car Buyers';
-const DESCRIPTION = 'Get a free, fast & accurate car valuation in Dubai, UAE—online or at your home. No obligations. Book now & get paid instantly with all paperwork done!';
+const TITLE = 'Free Car Valuation in Dubai & UAE | Instant Online Estimate';
+const DESCRIPTION = 'Find out what your car is really worth in under a minute. Free, no-obligation valuation with no hidden catches — sell with confidence.';
 
 export const metadata: Metadata = {
     title: TITLE,
@@ -13,7 +13,11 @@ export const metadata: Metadata = {
     openGraph: {
         title: TITLE,
         description: DESCRIPTION,
+        url: 'https://www.expatcarbuyers.com/car-valuation',
+        siteName: 'ExpatCarBuyers',
         images: ['/front/images/our-gurantee-right.webp'],
+        locale: 'en_US',
+        type: 'website',
     },
     twitter: {
         card: 'summary_large_image',

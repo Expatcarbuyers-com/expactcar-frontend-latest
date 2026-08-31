@@ -1,11 +1,29 @@
 import type { Metadata } from 'next';
 import { Target, Users, ShieldCheck, Heart } from 'lucide-react';
 
+const TITLE = 'About ExpatCarBuyers | The Trusted Way to Sell Your Car in UAE';
+const DESCRIPTION = 'Learn about ExpatCarBuyers, the leading car buying service in Dubai & UAE, and our mission to make selling your car fast, safe, and transparent.';
+
 export const metadata: Metadata = {
-  title: 'About ExpatCarBuyers | The Trusted Way to Sell Your Car in UAE',
-  description: 'Learn about ExpatCarBuyers, the leading car buying service in Dubai & UAE. Our mission is to provide the fastest, safest, and most transparent car selling experience.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: {
     canonical: 'https://www.expatcarbuyers.com/about-us',
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: 'https://www.expatcarbuyers.com/about-us',
+    siteName: 'ExpatCarBuyers',
+    images: ['/front/images/our-gurantee-right.webp'],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['/front/images/our-gurantee-right.webp'],
   },
 };
 

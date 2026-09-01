@@ -2,5 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /*?*game=*
+Disallow: /*?*slot=*
+Disallow: /*?*casino=*
+Disallow: /*?*mahjong=*
+Disallow: /*?*gacor=*
+Disallow: /*?*togel=*
 
 Sitemap: https://www.expatcarbuyers.com/sitemap.xml

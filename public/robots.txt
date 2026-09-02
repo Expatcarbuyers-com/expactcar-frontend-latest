@@ -1,22 +1,7 @@
 User-agent: *
 Allow: /
+
 Disallow: /api/
 Disallow: /admin/
-Disallow: /*?*game=*
-Disallow: /*?*slot=*
-Disallow: /*?*casino=*
-Disallow: /*?*mahjong=*
-Disallow: /*?*gacor=*
-Disallow: /*?*togel=*
-Disallow: /*?*s=*
-Disallow: /*{*
-Disallow: /contact?*
-Disallow: /we-buy-any-car?*
-Disallow: /sell-car-abu-dhabi?*
-Disallow: /sell-car-sharjah?*
-Disallow: /sell-my-car?*
-Disallow: /car-valuation?*
-Disallow: /about-us?*
-Disallow: /we-cash-any-car?*
 
 Sitemap: https://www.expatcarbuyers.com/sitemap.xml

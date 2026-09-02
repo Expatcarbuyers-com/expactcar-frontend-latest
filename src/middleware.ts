@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// All legitimate top-level routes declared in sitemap.xml
+const VALID_SITEMAP_ROUTES = new Set([
+  '/',
+  '/sell-car-abu-dhabi',
+  '/sell-car-sharjah',
+  '/car-valuation',
+  '/we-buy-any-car',
+  '/we-cash-any-car',
+  '/blog',
+  '/about-us',
+  '/contact',
+  '/privacy-policy',
+  '/terms-conditions',
+  '/robots.txt',
+  '/sitemap.xml',
+]);
+
 // Globally allowed advertising and analytics tracking parameters (safe on any page)
 const ALLOWED_GLOBAL_PARAMS = new Set([
   'utm_source',
@@ -137,12 +154,29 @@ export function middleware(request: NextRequest) {
   const searchParams = url.searchParams;
   const rawQuery = url.search.toLowerCase();
 
+  // 1. Enforce strict sitemap routes: if a path is NOT in the sitemap (and not a blog post/API), return 410 Gone
+  const isAllowedRoute =
+    VALID_SITEMAP_ROUTES.has(pathname) ||
+    pathname.startsWith('/blog/') ||
+    pathname.startsWith('/api/');
+
+  if (!isAllowedRoute) {
+    return new NextResponse(renderBranded410Page(), {
+      status: 410,
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      },
+    });
+  }
+
   // If there are no query parameters, continue immediately
   if (!url.search || searchParams.size === 0) {
     return NextResponse.next();
   }
 
-  // 1. Immediately drop any legacy template placeholders or bracketed queries
+  // 2. Immediately drop any legacy template placeholders or bracketed queries
   // e.g. ?q={search_term_string}, ?s={search_term_string}, %7Bsearch_term_string%7D
   if (
     rawQuery.includes('search_term_string') ||
@@ -156,11 +190,12 @@ export function middleware(request: NextRequest) {
       headers: {
         'X-Robots-Tag': 'noindex, nofollow, noarchive',
         'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
       },
     });
   }
 
-  // 2. Validate all query parameters against strict whitelist
+  // 3. Validate all query parameters against strict whitelist
   const isBlog = pathname === '/blog' || pathname.startsWith('/blog/');
   let hasInvalidParam = false;
 

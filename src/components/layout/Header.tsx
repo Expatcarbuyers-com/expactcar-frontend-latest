@@ -6,15 +6,6 @@ import { usePathname } from 'next/navigation';
 
 /* ─── Navigation Data ────────────────────────────────────────── */
 const navItems = [
-    /* {
-        id: 'sell-car',
-        label: 'SELL CAR',
-        children: [
-            { label: 'Sell My Car', href: '/sell-my-car' },
-            { label: 'We Buy Any Car', href: '/we-buy-any-car' },
-            { label: 'Cash for Cars', href: '/cash-for-cars' },
-        ],
-    }, */
     {
         id: 'by-city',
         label: 'BY CITY',

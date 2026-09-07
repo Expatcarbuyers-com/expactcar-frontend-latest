@@ -236,7 +236,7 @@ export default function AbuDhabiPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
                             'Sell your Abu Dhabi car with a same-day, no-hassle process',
-                            'We clear existing car finance before you&apos;re paid',
+                            "We clear existing car finance before you're paid",
                             'Instant payout — cash in hand or transferred within 30 minutes',
                             'Fully secure, RTA-recognized transaction',
                             'We handle every piece of ownership-transfer paperwork',

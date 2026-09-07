@@ -26,18 +26,13 @@ const homeFaqs: FAQItem[] = [
     },
     {
         question: "What are your payment options?",
-        answer: <p>You have the option to receive your payment via check, cash or bank transfer when you decide to sell your car with us.</p>
+        answer: <p>Cash, direct bank transfer, or a cheque — whichever you prefer. Most customers are paid within 30 minutes of accepting the offer.</p>
     },
     {
         question: "What documents do I need to bring?",
         answer: (
             <div className="space-y-2">
-                <p>The documents you must bring are:</p>
-                <ul className="list-disc ps-5 space-y-1">
-                    <li>Valid UAE ID.</li>
-                    <li>Valid Car Registration.</li>
-                    <li>Service history (if applicable).</li>
-                </ul>
+                <p>Your Emirates ID, the vehicle&apos;s registration card (Mulkiya), and — if applicable — your finance settlement letter or Power of Attorney if you&apos;re selling on someone else&apos;s behalf.</p>
             </div>
         )
     },
@@ -45,8 +40,7 @@ const homeFaqs: FAQItem[] = [
         question: "I have a bank loan or unpaid car fines. Can I still sell?",
         answer: (
             <div className="space-y-3">
-                <p>Yes, the amount will be deducted from the offer we make for your car, and we will take care of all the paperwork.</p>
-                <p>In addition to taking care of the loan, we will buy a bank-financed car. You will receive a balanced amount after we pay off the loan.</p>
+                <p>Yes. We settle any outstanding finance directly with your lender and deduct unpaid Salik/RTA fines from the sale price, so you walk away with a clean, final number.</p>
             </div>
         )
     }
@@ -69,18 +63,6 @@ const weBuyAnyCarFaqs: FAQItem[] = [
         question: "Is there a fee for the inspection or valuation?",
         answer: <p>No. The inspection, valuation and paperwork are free whether or not you go on to sell to us.</p>
     },
-    {
-        question: "What are your payment options?",
-        answer: <p>Cash, direct bank transfer, or a cheque — whichever you prefer. Most customers are paid within 30 minutes of accepting the offer.</p>
-    },
-    {
-        question: "What documents do I need to bring?",
-        answer: <p>Your Emirates ID, the vehicle&apos;s registration card (Mulkiya), and — if applicable — your finance settlement letter or Power of Attorney if you&apos;re selling on someone else&apos;s behalf.</p>
-    },
-    {
-        question: "I have a bank loan or unpaid car fines. Can I still sell?",
-        answer: <p>Yes. We settle any outstanding finance directly with your lender and deduct unpaid Salik/RTA fines from the sale price, so you walk away with a clean, final number.</p>
-    }
 ];
 
 const FAQAccordion = () => {

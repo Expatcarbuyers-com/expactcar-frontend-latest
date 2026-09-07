@@ -8,9 +8,24 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
     title: 'Car Buying Guide & News | ExpatCarBuyers Blog',
-    description: 'Stay updated with the latest car trends, selling tips, and market news in UAE. Your ultimate guide to selling cars in Dubai.',
+    description: 'Guides, selling tips and market news to help you get the most for your car anywhere in the UAE.',
     alternates: {
         canonical: 'https://www.expatcarbuyers.com/blog',
+    },
+    openGraph: {
+        title: 'Car Buying Guide & News | ExpatCarBuyers Blog',
+        description: 'Guides, selling tips and market news to help you get the most for your car anywhere in the UAE.',
+        url: 'https://www.expatcarbuyers.com/blog',
+        siteName: 'ExpatCarBuyers',
+        images: ['/front/images/our-gurantee-right.webp'],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Car Buying Guide & News | ExpatCarBuyers Blog',
+        description: 'Guides, selling tips and market news to help you get the most for your car anywhere in the UAE.',
+        images: ['/front/images/our-gurantee-right.webp'],
     },
 };
 

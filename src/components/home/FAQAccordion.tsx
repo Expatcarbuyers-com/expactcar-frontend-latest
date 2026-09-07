@@ -10,7 +10,7 @@ interface FAQItem {
     answer: React.ReactNode;
 }
 
-const faqs: FAQItem[] = [
+const homeFaqs: FAQItem[] = [
     {
         question: "How do I sell my car in UAE?",
         answer: (
@@ -52,9 +52,42 @@ const faqs: FAQItem[] = [
     }
 ];
 
+const weBuyAnyCarFaqs: FAQItem[] = [
+    {
+        question: "Do you buy cars that still have a bank loan on them?",
+        answer: <p>Yes. Tell us your outstanding finance amount when you book your appointment. We settle the loan directly with your bank as part of the sale and pay you any remaining difference in cash.</p>
+    },
+    {
+        question: "Will you buy my car if it isn't registered in my name?",
+        answer: <p>If the car isn&apos;t registered to you, you&apos;ll need a letter of authorization (Power of Attorney) from the registered owner, and the payment must be made in that owner&apos;s name.</p>
+    },
+    {
+        question: "How is the price you offer calculated?",
+        answer: <p>We inspect the car&apos;s mileage, mechanical condition, accident history and current market demand for that make and model, then price it against live UAE resale data — the same process whether you&apos;re selling a daily runabout or a luxury SUV.</p>
+    },
+    {
+        question: "Is there a fee for the inspection or valuation?",
+        answer: <p>No. The inspection, valuation and paperwork are free whether or not you go on to sell to us.</p>
+    },
+    {
+        question: "What are your payment options?",
+        answer: <p>Cash, direct bank transfer, or a cheque — whichever you prefer. Most customers are paid within 30 minutes of accepting the offer.</p>
+    },
+    {
+        question: "What documents do I need to bring?",
+        answer: <p>Your Emirates ID, the vehicle&apos;s registration card (Mulkiya), and — if applicable — your finance settlement letter or Power of Attorney if you&apos;re selling on someone else&apos;s behalf.</p>
+    },
+    {
+        question: "I have a bank loan or unpaid car fines. Can I still sell?",
+        answer: <p>Yes. We settle any outstanding finance directly with your lender and deduct unpaid Salik/RTA fines from the sale price, so you walk away with a clean, final number.</p>
+    }
+];
+
 const FAQAccordion = () => {
     const pathname = usePathname();
     const isHome = pathname === '/';
+    const isWeBuyAnyCar = pathname === '/we-buy-any-car';
+    const faqs = isWeBuyAnyCar ? weBuyAnyCarFaqs : homeFaqs;
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (

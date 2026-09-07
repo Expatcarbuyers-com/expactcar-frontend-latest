@@ -79,7 +79,7 @@ export default function EvaluatePage() {
             ══════════════════════════════════════════════ */}
             <section className="py-20 bg-white">
                 <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">Sounds great, but <span className="text-[#f24026]">how do I sell my car in UAE?</span></h2>
+                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">How We Calculate Your <span className="text-[#f24026]">Car&apos;s True Value</span></h2>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         {[
                             { title: 'Book an Appointment', desc: 'Let us know a time that works best for you and book an appointment for a vehicle inspection at your convenience.' },
@@ -120,13 +120,13 @@ export default function EvaluatePage() {
                             </div>
                             
                             <div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-8 uppercase tracking-tight">Why people <span className="text-[#f24026]">trust us?</span></h3>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-8 uppercase tracking-tight">What Makes Our <span className="text-[#f24026]">Valuation Accurate</span></h3>
                                 <div className="grid grid-cols-1 gap-6">
                                     {[
-                                        { title: 'Free Car Valuation', desc: 'Get a non-obligation quote for your car based on the physical condition and the market price.' },
-                                        { title: 'Ownership Transfer', desc: 'We are authorized by RTA, and our professionals will transfer the car in our office, with no hassles!' },
-                                        { title: 'Finance Settlement', desc: 'We clear the outstanding finance on cars and pay the difference to customers.' },
-                                        { title: 'Instant Cash', desc: 'You can sell a car in 30 minutes and receive cash, bank transfer or cheque!' }
+                                        { title: 'Live UAE Market Data', desc: 'Every quote is benchmarked against real-time resale prices across Dubai, Sharjah and Abu Dhabi and the wider UAE — not a generic online estimate.' },
+                                        { title: 'RTA-Recognized Inspection', desc: 'Our valuation is backed by an RTA-authorized ownership transfer process, so the number you&apos;re given is the number you&apos;ll actually be paid.' },
+                                        { title: 'Finance Payoff Included', desc: 'If there&apos;s outstanding finance on your car, we factor the settlement into your valuation upfront — no surprise deductions later.' },
+                                        { title: 'Cash in 30 Minutes', desc: 'Once you accept your valuation, payment — cash, bank transfer or cheque — is in your hands within half an hour.' }
                                     ].map(g => (
                                         <div key={g.title} className="flex gap-4 group">
                                             <div className="w-2.5 h-2.5 rounded-full bg-[#f24026] mt-2 shrink-0 shadow-[0_0_10px_rgba(242,64,38,0.4)] group-hover:scale-125 transition-transform" />

@@ -32,7 +32,7 @@ const contactItems = [
         ),
         label: 'Support Email',
         value: 'contact@expatcarbuyers.com',
-        href: 'mailto:contact@expatcarbuyers.com',
+        href: '/contact',
     },
 ];
 
@@ -158,7 +158,7 @@ export default function Footer() {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="mailto:contact@expatcarbuyers.com" className="hover:text-[#f24026] transition-colors">
+                                        <a href="/contact" className="hover:text-[#f24026] transition-colors">
                                             contact@expatcarbuyers.com
                                         </a>
                                     </li>

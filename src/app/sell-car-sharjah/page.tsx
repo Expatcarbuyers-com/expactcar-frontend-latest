@@ -190,14 +190,14 @@ export default function SharjahPage() {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            'A guaranteed quick and hassle-free sale',
-                            'Secure finance settlement',
-                            'On the spot cash in hand payment',
-                            'Safe, secure and trusted process',
-                            'All RTA paperwork taken care of for you',
-                            '0 hidden or unforeseen costs',
-                            'No obligation No pressure quote',
-                            'Free professional car inspection'
+                            'Fast, no-pressure sale anywhere in Sharjah',
+                            'Outstanding finance settled on the spot',
+                            'Cash, bank transfer or cheque — paid immediately',
+                            'Every transaction handled securely, start to finish',
+                            'RTA ownership transfer completed in-house',
+                            'Zero hidden costs — the quote you&apos;re given is the price you get',
+                            'No obligation to accept — walk away anytime',
+                            'Free professional inspection at our Sharjah appointment point'
                         ].map((item, idx) => (
                             <div key={idx} className="flex items-start gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                                 <div className="flex-shrink-0 w-8 h-8 bg-[#f24026] rounded-full flex items-center justify-center">

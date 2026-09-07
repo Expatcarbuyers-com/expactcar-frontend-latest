@@ -5,10 +5,25 @@ import FAQAccordion from '@/components/home/FAQAccordion';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
 
 export const metadata: Metadata = {
-    title: 'We Buy Any Car Dubai | Best Car Buyer in UAE',
-    description: 'We Buy Any Car in Dubai, UAE, Sharjah and Abu Dhabi. Get the highest price as per market and instant cash payment.',
+    title: 'We Buy Any Car in the UAE | Best Car Buyer, Nationwide',
+    description: 'We buy any car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and every emirate in between. Any make, model or condition, highest market price, instant cash.',
     alternates: {
         canonical: 'https://www.expatcarbuyers.com/we-buy-any-car',
+    },
+    openGraph: {
+        title: 'We Buy Any Car in the UAE | Best Car Buyer, Nationwide',
+        description: 'We buy any car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and every emirate in between. Any make, model or condition, highest market price, instant cash.',
+        url: 'https://www.expatcarbuyers.com/we-buy-any-car',
+        siteName: 'ExpatCarBuyers',
+        images: ['https://www.expatcarbuyers.com/front/images/X1.webp'],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'We Buy Any Car in the UAE | Best Car Buyer, Nationwide',
+        description: 'We buy any car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and every emirate in between. Any make, model or condition, highest market price, instant cash.',
+        images: ['https://www.expatcarbuyers.com/front/images/X1.webp'],
     },
 };
 
@@ -157,7 +172,7 @@ export default function WeBuyAnyCarPage() {
             {/* ══════════════════════════════════════════════
                 PRICE INCLUDED (Red Block)
             ══════════════════════════════════════════════ */}
-            <PriceIncludedSection />
+            <PriceIncludedSection variant="weBuyAnyCar" />
 
             {/* ══════════════════════════════════════════════
                 OUR GUARANTEES (4-Column Grid)
@@ -171,14 +186,14 @@ export default function WeBuyAnyCarPage() {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            'A guaranteed quick and hassle-free sale',
-                            'Secure finance settlement',
-                            'On the spot cash in hand payment',
-                            'Safe, secure and trusted process',
-                            'All RTA paperwork taken care of for you',
-                            '0 hidden or unforeseen costs',
-                            'No obligation No pressure quote',
-                            'Free professional car inspection'
+                            'We buy every make, model and condition — no exceptions',
+                            'Finance settlements handled directly with your bank',
+                            'Same-day payment by cash, transfer or cheque',
+                            'A secure, documented process from valuation to payout',
+                            'RTA paperwork completed for you, in-house',
+                            'No unforeseen costs once the offer is made',
+                            'No pressure to accept — the decision stays with you',
+                            'Free inspection, whether or not you decide to sell'
                         ].map((item, idx) => (
                             <div key={idx} className="flex items-start gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                                 <div className="flex-shrink-0 w-8 h-8 bg-[#f24026] rounded-full flex items-center justify-center">

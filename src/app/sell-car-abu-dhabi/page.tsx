@@ -221,7 +221,7 @@ export default function AbuDhabiPage() {
             {/* ══════════════════════════════════════════════
                 PRICE INCLUDED (Red Block)
             ══════════════════════════════════════════════ */}
-            <PriceIncludedSection />
+            <PriceIncludedSection variant="abuDhabi" />
 
             {/* ══════════════════════════════════════════════
                 OUR GUARANTEES (4-Column Grid)
@@ -235,14 +235,14 @@ export default function AbuDhabiPage() {
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            'A guaranteed quick and hassle-free sale',
-                            'Secure finance settlement',
-                            'On the spot cash in hand payment',
-                            'Safe, secure and trusted process',
-                            'All RTA paperwork taken care of for you',
-                            '0 hidden or unforeseen costs',
-                            'No obligation No pressure quote',
-                            'Free professional car inspection'
+                            'Sell your Abu Dhabi car with a same-day, no-hassle process',
+                            'We clear existing car finance before you&apos;re paid',
+                            'Instant payout — cash in hand or transferred within 30 minutes',
+                            'Fully secure, RTA-recognized transaction',
+                            'We handle every piece of ownership-transfer paperwork',
+                            'No hidden fees added after inspection',
+                            'A quote with zero pressure or obligation to sell',
+                            'Complimentary inspection for every Abu Dhabi appointment'
                         ].map((item, idx) => (
                             <div key={idx} className="flex items-start gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
                                 <div className="flex-shrink-0 w-8 h-8 bg-[#f24026] rounded-full flex items-center justify-center">

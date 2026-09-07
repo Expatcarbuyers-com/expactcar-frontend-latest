@@ -3,10 +3,25 @@ import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 
 export const metadata: Metadata = {
-    title: 'Cash For Any Car Dubai | Instant Cash for Cars UAE',
-    description: 'Cash Your Car in Dubai, Sharjah and Abu-Dhabi with The Highest No-obligation Price. We Cash Any Car in 30 Minutes regardless of condition.',
+    title: 'Cash For Any Car in the UAE | Instant Cash for Cars',
+    description: 'Cash your car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and beyond — for the highest no-obligation price. Free inspection, instant payout in 30 minutes.',
     alternates: {
         canonical: 'https://www.expatcarbuyers.com/we-cash-any-car',
+    },
+    openGraph: {
+        title: 'Cash For Any Car in the UAE | Instant Cash for Cars',
+        description: 'Cash your car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and beyond — for the highest no-obligation price. Free inspection, instant payout in 30 minutes.',
+        url: 'https://www.expatcarbuyers.com/we-cash-any-car',
+        siteName: 'ExpatCarBuyers',
+        images: ['https://www.expatcarbuyers.com/front/images/Jaguar-Premium.png'],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Cash For Any Car in the UAE | Instant Cash for Cars',
+        description: 'Cash your car anywhere in the UAE — Dubai, Sharjah, Abu Dhabi and beyond — for the highest no-obligation price. Free inspection, instant payout in 30 minutes.',
+        images: ['https://www.expatcarbuyers.com/front/images/Jaguar-Premium.png'],
     },
 };
 
@@ -40,7 +55,7 @@ export default function WeCashAnyCarPage() {
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] bg-[#FFD0C9]/30 rounded-[50%_50%_40%_60%] -z-5" />
                             
                             <img
-                                src="/front/images/Jaguar.webp" 
+                                src="/front/images/Jaguar-Premium.png" 
                                 alt="We Cash Any Car Dubai"
                                 className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.1)] relative z-10"
                             />

@@ -12,15 +12,15 @@ interface FAQItem {
 
 const homeFaqs: FAQItem[] = [
     {
-        question: "How do I sell my car in UAE?",
+        question: "How do I sell my car in Dubai?",
         answer: (
             <div className="space-y-3">
-                <p>With our fast car selling steps you can easily sell your car in UAE and walk away with cash payment in 30 minutes! </p>
+                <p>With our fast car selling steps you can easily sell your car in Dubai and walk away with cash payment in 30 minutes! </p>
                 <p>All you need to do is drop by our office located in the UAE to schedule an appointment.</p>
                 <p>Choose the date and time that suits you best for selling your car in Dubai. On that day, bring your car for valuation to be conducted by our highly skilled experts. </p>
                 <p>Once your car’s inspection is completed, we will then evaluate your car within minutes and offer best price in market with no obligations.</p>
                 <p>You can complete the transaction then and there. If you accept our offer and decide to sell your car to us, we will handle all paperwork and Instant cash will be paid to you.</p>
-                <p>Selling your car in UAE has never been easier!</p>
+                <p>Selling your car in Dubai has never been easier!</p>
             </div>
         )
     },

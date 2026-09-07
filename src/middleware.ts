@@ -39,6 +39,12 @@ const ALLOWED_GLOBAL_PARAMS = new Set([
 // Parameters allowed exclusively on /blog
 const ALLOWED_BLOG_PARAMS = new Set(['page', 'q']);
 
+const GONE_BLOG_PATHS = new Set([
+  '/blog/how-to-sell-your-car-fast-in-dubai',
+  '/blog/get-best-price-used-car-dubai',
+  '/blog/dubai-car-market-trends-2026',
+]);
+
 function renderBranded410Page(): string {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -153,6 +159,17 @@ export function middleware(request: NextRequest) {
   const pathname = url.pathname.toLowerCase();
   const searchParams = url.searchParams;
   const rawQuery = url.search.toLowerCase();
+
+  if (GONE_BLOG_PATHS.has(pathname)) {
+    return new NextResponse(renderBranded410Page(), {
+      status: 410,
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      },
+    });
+  }
 
   // 1. Enforce strict sitemap routes: if a path is NOT in the sitemap (and not a blog post/API), return 410 Gone
   const isAllowedRoute =

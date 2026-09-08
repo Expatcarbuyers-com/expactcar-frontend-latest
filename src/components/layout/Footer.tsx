@@ -94,9 +94,6 @@ export default function Footer() {
                                     className="mb-5 brightness-0 invert"
                                 />
                             </Link>
-                            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
-                                Many people would just call us a car buying company, but that&apos;s just half of the story. Expat Car Buyers was formed to make it easier for car sellers to sell used cars — without the traditional setbacks.
-                            </p>
                             {/* Social */}
                             <div className="flex gap-3">
                                 {['facebook', 'twitter', 'instagram'].map(platform => (

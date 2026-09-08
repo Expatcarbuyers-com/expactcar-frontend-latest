@@ -74,46 +74,6 @@ export default function AbuDhabiPage() {
             </section>
 
             {/* ══════════════════════════════════════════════
-                THE ENTIRE SELLING PROCEDURE IS EASY, QUICK, AND BENEFICIAL!
-            ══════════════════════════════════════════════ */}
-            <section className="py-20 bg-white">
-                <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tight leading-tight">
-                            THE ENTIRE SELLING PROCEDURE IS<br/>
-                            <span className="text-[#f24026]">EASY, QUICK, AND BENEFICIAL!</span>
-                        </h2>
-                        <div className="w-24 h-1 bg-[#f24026] mx-auto mt-6 rounded-full" />
-                    </div>
-                    
-                    <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 bg-[#FCF5F2] p-8 md:p-12">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            <div className="space-y-6">
-                                <h3 className="text-2xl font-bold text-gray-900 leading-snug">
-                                    Selling your car shouldn't be a chore. We've optimized every step to save you time and maximize your value.
-                                </h3>
-                                <p className="text-gray-600 leading-relaxed">
-                                    From the moment you request an online valuation to the final payment, our process is designed for transparency. No hidden fees, no complicated paperwork, and no waiting weeks for your money.
-                                </p>
-                                <div className="flex flex-wrap gap-4 pt-4">
-                                    <span className="px-6 py-3 bg-white rounded-full text-sm font-bold text-gray-700 shadow-sm border border-gray-50">✓ 30-Minute Process</span>
-                                    <span className="px-6 py-3 bg-white rounded-full text-sm font-bold text-gray-700 shadow-sm border border-gray-50">✓ Instant Cash Payment</span>
-                                    <span className="px-6 py-3 bg-white rounded-full text-sm font-bold text-gray-700 shadow-sm border border-gray-50">✓ Free RTA Handling</span>
-                                </div>
-                            </div>
-                            <div className="relative">
-                                <img 
-                                    src="/front/images/selling-procedure.png" 
-                                    alt="Selling Procedure Graphic" 
-                                    className="w-full h-auto rounded-2xl"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ══════════════════════════════════════════════
                 HOW DOES IT WORK
             ══════════════════════════════════════════════ */}
             <section className="py-20 bg-white">

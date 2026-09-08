@@ -6,40 +6,28 @@ import { usePathname } from 'next/navigation';
 
 const testimonials = [
     {
-        name: "Irina",
-        date: "2022-01-12",
-        text: "Amazing service. If u want to experience the hassle free way of selling car, this is the best place to go. Been to other companies in past and I must say their service is exceptional.. cheers",
-        image: "/front/images/Irina.webp"
+        name: "Ahmed Ballaa",
+        text: "Just want to say how easy the process was and thanks to the amazing Kaiser at Expat Buyers for helping me sell my car",
     },
     {
-        name: "Omar Saeed",
-        date: "2022-01-12",
-        text: "I visited several car buying companies in same area but Expat car buyers offered the most competitive prices whilst also offering a comprehensive and professional service to enable a smooth transaction. Great customer service. Would highly recommend",
-        image: "/front/images/Omar.webp"
+        name: "Nadeem Asghar",
+        text: "Overall, my experience with Expat Car Buyers was outstanding. If you're an expat looking to sell your car, I wholeheartedly recommend their services. Their professionalism, transparency, and commitment to customer satisfaction make them a standout choice in the market. Thank you, Expat Car Buyers, for making what could have been a daunting process incredibly easy and rewarding!",
     },
     {
-        name: "Ajith Kumar",
-        date: "2022-01-12",
-        text: "I visited several car buying companies in same area but Expat car buyers offered the most competitive prices whilst also offering a comprehensive and professional service to enable a smooth transaction. Great customer service. Would highly recommend",
-        image: "/front/images/Ajith.webp"
+        name: "Karan Bansal",
+        text: "Received excellent assistance and professionalism throughout my car sale process by Kaiser. His attention to detail and transparent approach made the entire transaction a pleasure. Definitely recommend to reach out to Kaiser if you want to sell your car without any hassles or trust issues.",
     },
     {
-        name: "Lucy Komolka",
-        date: "2022-01-12",
-        text: "Highly recommend selling your car with the Expat Car Buyers. Fast, genuine service. Very helpful guys. My experience was great and wouldn't go to any other place in Dubai.",
-        image: "/front/images/Lucy.webp"
+        name: "M J",
+        text: "I started my journey to sell my car with them and then moved to other buyers, I have to admit unlike others these guys were EXTREMELY professional and patient understanding a seller’s mind. KAISER was very kind and friendly who explained and assisted me in the entire process. And yes, their offered price was NO DOUBT THE best of all the others I checked with. I see these guys progressing to a level of big success if they maintain their transparency and professionalism as they did with me. Do not waste your time going to any other places like I did as this is the ONE STOP that you need if you want to sell your car in less than 30mins for instant cash, No bank transfer waiting period and etc, CASH IN HAND! Keep it up Expat Car Buyers and thanks a lot again",
     },
     {
-        name: "Shafqat Ali",
-        date: "2022-01-12",
-        text: "It was very easy as in one stop shop. Transfer of car and cash payment on the spot. The whole thing took under 30 mins and that's what I needed. Thank you guys.",
-        image: "/front/images/Shafqat.webp"
+        name: "Fraser Robertson",
+        text: "Great team to deal with and fair price given for my vehicle! All necessary paperwork sorted with ease and that Syed was my first contact who was pleasant and helpful with doing the vehicle and analysis. With Qaiser helping out with the transfer of vehicle and payment side of things. Both members were polite and friendly! Well recommended! Payment via bank transfer was fast too!",
     },
     {
-        name: "Thomas Buchner",
-        date: "2022-01-12",
-        text: "Could sell my car in very short time and got a fair price. Thank you for the excellent service!",
-        image: "/front/images/Thomas.webp"
+        name: "Happie Rao",
+        text: "I had amazing experience of selling my car through expatcarbuyers. Wonderful experience and highly recommend",
     },
 ];
 
@@ -102,11 +90,10 @@ export default function TestimonialCarousel() {
                                 </p>
 
                                 <div className="mt-auto pt-6 border-t border-gray-100 w-full flex flex-col items-center">
-                                    <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#FFD0C9] mb-4 shadow-md">
-                                        <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                                    <div className="w-16 h-16 rounded-full border-4 border-[#FFD0C9] mb-4 shadow-md bg-[#FCF5F2] flex items-center justify-center text-[#f24026] font-bold text-xl">
+                                        {t.name.charAt(0)}
                                     </div>
                                     <h4 className="font-bold text-gray-900 text-base mb-1">{t.name}</h4>
-                                    <div className="text-xs font-bold text-[#f24026] uppercase tracking-widest">{t.date}</div>
                                 </div>
                             </div>
                         </div>

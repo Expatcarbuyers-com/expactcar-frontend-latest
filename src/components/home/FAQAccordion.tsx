@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
@@ -101,23 +101,20 @@ const FAQAccordion = () => {
                             </div>
                         </button>
                         
-                        <AnimatePresence>
-                            {isOpen && (
-                                <motion.div
-                                    initial={isHome ? { height: 0, opacity: 0 } : { height: 'auto', opacity: 1 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={isHome ? { height: 0, opacity: 0 } : { height: 'auto', opacity: 1 }}
-                                    transition={isHome ? { duration: 0.3, ease: "easeInOut" } : { duration: 0 }}
-                                >
-                                    <div className="px-6 pb-6 pt-0">
-                                        <div className="h-px bg-gray-50 mb-6" />
-                                        <div className="text-gray-600 leading-relaxed text-[0.95rem]">
-                                            {faq.answer}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        <motion.div
+                            initial={false}
+                            animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                            transition={isHome ? { duration: 0.3, ease: 'easeInOut' } : { duration: 0 }}
+                            className={isOpen ? '' : 'pointer-events-none'}
+                            aria-hidden={!isOpen}
+                        >
+                            <div className="px-6 pb-6 pt-0">
+                                <div className="h-px bg-gray-50 mb-6" />
+                                <div className="text-gray-600 leading-relaxed text-[0.95rem]">
+                                    {faq.answer}
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 );
             })}

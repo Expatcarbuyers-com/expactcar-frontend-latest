@@ -175,6 +175,42 @@ export default function WeCashAnyCarPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ══════════════════════════════════════════════
+                CASH SALE BENEFITS
+            ══════════════════════════════════════════════ */}
+            <section className="py-20 bg-[#FCF5F2]">
+                <div className="max-w-6xl mx-auto px-4 md:px-8">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center uppercase tracking-wider">
+                        Why Sell for Cash Instead of Trading In?
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {[
+                            {
+                                title: 'No Dealership Markdown',
+                                description: "Trade-in values are quietly discounted to protect a dealer's margin on your next car. A cash sale is priced purely on your car's market value.",
+                            },
+                            {
+                                title: 'No Waiting on a New-Car Order',
+                                description: "Cash in hand today means you're not tied to picking up a replacement vehicle before you get paid.",
+                            },
+                            {
+                                title: 'Works With Any Condition',
+                                description: "Accident history, high mileage or mechanical faults won't disqualify you from a cash offer the way they can with a trade-in.",
+                            },
+                            {
+                                title: 'One Trip, Not Three',
+                                description: 'Valuation, ownership transfer and payment all happen at the same appointment — no repeat visits to a showroom.',
+                            },
+                        ].map((benefit) => (
+                            <div key={benefit.title} className="bg-white p-8 rounded-3xl border border-[#FFD0C9] shadow-sm">
+                                <h3 className="font-bold text-gray-900 mb-3">{benefit.title}</h3>
+                                <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </main>
     );
 }

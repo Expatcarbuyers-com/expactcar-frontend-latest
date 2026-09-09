@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Calendar, ChevronLeft, Star } from 'lucide-react';
 import { serverFetch } from '@/lib/serverApi';
 import TableOfContents from '@/components/blog/TableOfContents';
@@ -62,14 +63,11 @@ export default async function BlogDetailPage({
             serverFetch('/blogs?per_page=2'),
         ]);
         post = postRes.data;
+        if (!post) notFound();
         related = (relatedRes.data.data ?? []).filter((p: any) => p.slug !== slug);
         processedContent = injectHeadingIds(post.content ?? '', post.outline ?? []);
     } catch {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                Article not found.
-            </div>
-        );
+        notFound();
     }
 
     const articleSchema = {

@@ -40,10 +40,32 @@ const ALLOWED_GLOBAL_PARAMS = new Set([
 const ALLOWED_BLOG_PARAMS = new Set(['page', 'q']);
 
 const GONE_BLOG_PATHS = new Set([
+  // Legacy / discontinued blog posts flagged by client
+  '/blog/fast-car-buyers-at-your-disposal',
+  '/blog/sell-used-cars-in-dubai-online-safely-with-free-valuation',
+  '/blog/best-online-car-buying-site',
+  '/blog/best-places-to-sell-your-car-in-dubai',
+  '/blog/8-common-mistakes-that-people-make-while-selling-their-used-car',
+  '/blog/sell-your-car-with-quick-and-fair-cash-compensation',
+  '/blog/we-can-buy-any-car-with-fair-price-',
+  '/blog/we-can-buy-any-car-with-fair-price',
+  '/blog/page/1',
+  '/blog/page/2',
+  '/blog/page/3',
   '/blog/how-to-sell-your-car-fast-in-dubai',
   '/blog/get-best-price-used-car-dubai',
   '/blog/dubai-car-market-trends-2026',
 ]);
+
+const API_BASE = (
+  process.env.INTERNAL_API_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  'http://localhost:8000/api/v1'
+).replace(/\/$/, '');
+
+// In-memory cache for blog slug validation to maintain ultra-fast middleware response times
+const knownValidBlogSlugs = new Set<string>();
+const knownGoneBlogSlugs = new Set<string>();
 
 function renderBranded410Page(): string {
   return `<!DOCTYPE html>
@@ -154,13 +176,15 @@ function renderBranded410Page(): string {
 </html>`;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
-  const pathname = url.pathname.toLowerCase();
+  const rawPathname = url.pathname.toLowerCase();
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, '') : rawPathname;
   const searchParams = url.searchParams;
   const rawQuery = url.search.toLowerCase();
 
-  if (GONE_BLOG_PATHS.has(pathname)) {
+  // Handle legacy uploadedimages paths (dead WordPress image uploads)
+  if (pathname.startsWith('/uploadedimages/') || pathname === '/uploadedimages') {
     return new NextResponse(renderBranded410Page(), {
       status: 410,
       headers: {
@@ -169,6 +193,89 @@ export function middleware(request: NextRequest) {
         'Cache-Control': 'public, max-age=86400, s-maxage=86400',
       },
     });
+  }
+
+  // Handle explicitly gone blog paths or legacy pagination URLs (/blog/page/*)
+  if (
+    GONE_BLOG_PATHS.has(pathname) ||
+    pathname === '/blog/page' ||
+    pathname.startsWith('/blog/page/')
+  ) {
+    return new NextResponse(renderBranded410Page(), {
+      status: 410,
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      },
+    });
+  }
+
+  // Handle single blog article requests: only allow those created in the backend, return 410 for all others
+  if (pathname.startsWith('/blog/') && pathname !== '/blog') {
+    const slug = pathname.replace(/^\/blog\//, '').trim();
+
+    if (!slug || slug.startsWith('page')) {
+      return new NextResponse(renderBranded410Page(), {
+        status: 410,
+        headers: {
+          'X-Robots-Tag': 'noindex, nofollow, noarchive',
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+        },
+      });
+    }
+
+    if (knownGoneBlogSlugs.has(slug)) {
+      return new NextResponse(renderBranded410Page(), {
+        status: 410,
+        headers: {
+          'X-Robots-Tag': 'noindex, nofollow, noarchive',
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+        },
+      });
+    }
+
+    if (!knownValidBlogSlugs.has(slug)) {
+      try {
+        const res = await fetch(`${API_BASE}/blogs/${encodeURIComponent(slug)}`, {
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(3000),
+        });
+
+        if (res.status === 404) {
+          knownGoneBlogSlugs.add(slug);
+          return new NextResponse(renderBranded410Page(), {
+            status: 410,
+            headers: {
+              'X-Robots-Tag': 'noindex, nofollow, noarchive',
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+            },
+          });
+        }
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.data) {
+            knownValidBlogSlugs.add(slug);
+          } else {
+            knownGoneBlogSlugs.add(slug);
+            return new NextResponse(renderBranded410Page(), {
+              status: 410,
+              headers: {
+                'X-Robots-Tag': 'noindex, nofollow, noarchive',
+                'Content-Type': 'text/html; charset=utf-8',
+                'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+              },
+            });
+          }
+        }
+      } catch {
+        // In case of transient connection issue, let request proceed to page component
+      }
+    }
   }
 
   // 1. Enforce strict sitemap routes: if a path is NOT in the sitemap (and not a blog post/API), return 410 Gone
@@ -252,8 +359,11 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all requests except static assets and Next.js internals
+     * Match all requests except static assets and Next.js internals,
+     * but explicitly route /uploadedimages/* to middleware so legacy media receives 410 Gone.
      */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/uploadedimages/:path*',
+    '/uploadedimages',
   ],
 };

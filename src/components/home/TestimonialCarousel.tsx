@@ -1,10 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Star } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-const testimonials = [
+interface Testimonial {
+    name: string;
+    text: string;
+}
+
+const testimonials: Testimonial[] = [
     {
         name: "Ahmed Ballaa",
         text: "Just want to say how easy the process was and thanks to the amazing Kaiser at Expat Buyers for helping me sell my car",
@@ -40,11 +45,22 @@ const GoogleIcon = () => (
     </svg>
 );
 
+const StarRating = () => (
+    <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => (
+            <svg key={i} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+        ))}
+    </div>
+);
+
 export default function TestimonialCarousel() {
     const pathname = usePathname();
     const isHome = pathname === '/';
     const [index, setIndex] = useState(0);
     const [perPage, setPerPage] = useState(3);
+    const [selectedReview, setSelectedReview] = useState<Testimonial | null>(null);
     const trackRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -63,8 +79,47 @@ export default function TestimonialCarousel() {
     const prev = () => setIndex(i => Math.max(i - 1, 0));
     const cardWidth = 100 / perPage;
 
+    // Prevent background scrolling when modal is open
+    useEffect(() => {
+        if (selectedReview) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [selectedReview]);
+
     return (
         <div className="relative">
+            {/* Header with Title and CarSwitch-style Navigation Controls */}
+            <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    Our Happy <span className="text-[#f24026]">Customers</span>
+                </h2>
+
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={prev}
+                        disabled={index === 0}
+                        className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-700 flex items-center justify-center hover:border-[#f24026] hover:text-[#f24026] hover:shadow-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-xs"
+                        aria-label="Previous testimonials"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+                    <button
+                        onClick={next}
+                        disabled={index === maxIndex}
+                        className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-700 flex items-center justify-center hover:border-[#f24026] hover:text-[#f24026] hover:shadow-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer shadow-xs"
+                        aria-label="Next testimonials"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
+                </div>
+            </div>
+
+            {/* Carousel Slider */}
             <div className="overflow-hidden">
                 <div
                     ref={trackRef}
@@ -74,64 +129,148 @@ export default function TestimonialCarousel() {
                         transitionDuration: isHome ? '500ms' : '0ms'
                     }}
                 >
-                    {testimonials.map((t, i) => (
-                        <div
-                            key={i}
-                            className="flex-shrink-0 px-3"
-                            style={{ width: `${cardWidth}%` }}
-                        >
-                            <div className="review-card flex flex-col items-center text-center p-8 bg-white rounded-[2rem] shadow-xl border border-[#FFD0C9]/50" style={{ minHeight: '380px' }}>
-                                <div className="mb-6">
-                                    <img src="/front/images/5stars.png" alt="5 stars" width={120} className="mx-auto" />
-                                </div>
-                                
-                                <p className="text-[#626161] text-[0.95rem] leading-relaxed mb-8 italic flex-grow">
-                                    &ldquo;{t.text}&rdquo;
-                                </p>
+                    {testimonials.map((t, i) => {
+                        const isLong = t.text.length > 120;
+                        const displayText = isLong ? t.text.slice(0, 115).trim() : t.text;
 
-                                <div className="mt-auto pt-6 border-t border-gray-100 w-full flex flex-col items-center">
-                                    <div className="w-16 h-16 rounded-full border-4 border-[#FFD0C9] mb-4 shadow-md bg-[#FCF5F2] flex items-center justify-center text-[#f24026] font-bold text-xl">
-                                        {t.name.charAt(0)}
+                        return (
+                            <div
+                                key={i}
+                                className="flex-shrink-0 px-2.5"
+                                style={{ width: `${cardWidth}%` }}
+                            >
+                                {/* Uniform Fixed-Size Review Card */}
+                                <div className="h-[250px] p-6 bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all flex flex-col justify-between text-left group">
+                                    <div>
+                                        {/* 5 Yellow Stars */}
+                                        <div className="mb-3.5">
+                                            <StarRating />
+                                        </div>
+
+                                        {/* Truncated Review Text with read more */}
+                                        <p className="text-gray-600 text-[0.92rem] leading-relaxed">
+                                            &ldquo;{displayText}
+                                            {isLong && (
+                                                <>
+                                                    &hellip;&rdquo;
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setSelectedReview(t)}
+                                                        className="text-[#f24026] font-semibold text-xs ml-1 hover:underline cursor-pointer inline-block"
+                                                    >
+                                                        read more
+                                                    </button>
+                                                </>
+                                            )}
+                                            {!isLong && <>&rdquo;</>}
+                                        </p>
                                     </div>
-                                    <h4 className="font-bold text-gray-900 text-base mb-1">{t.name}</h4>
+
+                                    {/* Footer: Avatar + Name on left, Google Icon on right (NO DATE) */}
+                                    <div className="flex items-center justify-between pt-3.5 border-t border-gray-50 mt-auto">
+                                        <div className="flex items-center gap-3 min-w-0">
+                                            <div className="w-10 h-10 rounded-full bg-[#FCF5F2] border border-[#FFD0C9] text-[#f24026] font-bold flex items-center justify-center text-sm shrink-0">
+                                                {t.name.charAt(0)}
+                                            </div>
+                                            <div className="min-w-0">
+                                                <h4 className="font-bold text-gray-900 text-sm truncate">
+                                                    {t.name}
+                                                </h4>
+                                            </div>
+                                        </div>
+
+                                        <div className="shrink-0 pl-2" title="Verified Google Review">
+                                            <GoogleIcon />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-8">
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-7">
                 {Array.from({ length: maxIndex + 1 }).map((_, i) => (
                     <button
                         key={i}
                         onClick={() => setIndex(i)}
-                        className={`h-2.5 rounded-full transition-all duration-200 ${i === index ? 'bg-[#f24026] w-6' : 'bg-gray-300 w-2.5'}`}
+                        className={`h-2 rounded-full transition-all duration-200 cursor-pointer ${i === index ? 'bg-[#f24026] w-6' : 'bg-gray-300 w-2 hover:bg-gray-400'}`}
                         aria-label={`Go to slide ${i + 1}`}
                     />
                 ))}
             </div>
 
-            {/* Arrow Controls */}
-            <div className="flex justify-center gap-3 mt-4">
-                <button
-                    onClick={prev}
-                    disabled={index === 0}
-                    className="w-10 h-10 rounded-full border-2 border-[#f24026] text-[#f24026] flex items-center justify-center hover:bg-[#f24026] hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Previous"
+            {/* Bottom Google Link */}
+            <div className="text-center mt-6">
+                <a
+                    href="https://share.google/62cwKyDxgxk8IJISS"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-[#f24026] transition-colors"
                 >
-                    <ChevronLeft size={20} />
-                </button>
-                <button
-                    onClick={next}
-                    disabled={index === maxIndex}
-                    className="w-10 h-10 rounded-full border-2 border-[#f24026] text-[#f24026] flex items-center justify-center hover:bg-[#f24026] hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Next"
-                >
-                    <ChevronRight size={20} />
-                </button>
+                    <GoogleIcon />
+                    <span>Read all reviews on Google &rarr;</span>
+                </a>
             </div>
+
+            {/* Modal for Full Review Expansion */}
+            {selectedReview && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
+                    onClick={() => setSelectedReview(null)}
+                >
+                    <div
+                        className="bg-white rounded-3xl max-w-lg w-full p-7 md:p-8 shadow-2xl relative border border-gray-100 text-left animate-in fade-in zoom-in-95 duration-150"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Close button */}
+                        <button
+                            onClick={() => setSelectedReview(null)}
+                            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-800 flex items-center justify-center transition-colors cursor-pointer"
+                            aria-label="Close review"
+                        >
+                            <X size={18} />
+                        </button>
+
+                        {/* Stars */}
+                        <div className="mb-4">
+                            <StarRating />
+                        </div>
+
+                        {/* Full Review Text */}
+                        <div className="max-h-[50vh] overflow-y-auto pr-2 mb-6">
+                            <p className="text-gray-700 text-base leading-relaxed italic">
+                                &ldquo;{selectedReview.text}&rdquo;
+                            </p>
+                        </div>
+
+                        {/* Reviewer Info */}
+                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div className="flex items-center gap-3">
+                                <div className="w-11 h-11 rounded-full bg-[#FCF5F2] border border-[#FFD0C9] text-[#f24026] font-bold flex items-center justify-center text-base shrink-0">
+                                    {selectedReview.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-900 text-base">{selectedReview.name}</h4>
+                                    <span className="text-xs text-gray-500 font-medium">Verified Customer</span>
+                                </div>
+                            </div>
+
+                            <a
+                                href="https://share.google/62cwKyDxgxk8IJISS"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 bg-gray-50 hover:bg-gray-100 px-3 py-1.5 rounded-full border border-gray-100 shrink-0 transition-colors"
+                            >
+                                <GoogleIcon />
+                                <span className="text-xs font-semibold text-gray-700">Google Review</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

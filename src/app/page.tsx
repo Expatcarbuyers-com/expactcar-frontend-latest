@@ -289,9 +289,6 @@ export default function Home() {
             ══════════════════════════════════════════════ */}
             <section className="py-16 bg-[#FCF5F2]">
                 <div className="max-w-6xl mx-auto px-4 md:px-8">
-                    <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-10">
-                        Our Happy <span className="text-[#f24026]">Customers</span>
-                    </h2>
                     <TestimonialCarousel />
                 </div>
             </section>

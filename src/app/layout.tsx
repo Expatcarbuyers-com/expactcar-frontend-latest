@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     icons: {
-        icon: "/favicon.webp",
+        icon: "/favicon.ico",
     },
     // Sitewide defaults so every page has working OG/Twitter tags even before
     // it sets its own — individual pages override title/description/openGraph

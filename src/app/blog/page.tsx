@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import { Search, ChevronRight, Calendar, Clock } from 'lucide-react';
 import { serverFetch } from '@/lib/serverApi';
 import BlogSearchInput from '@/components/blog/BlogSearchInput';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import { getStorageUrl } from '@/lib/blogUtils';
 
 export const revalidate = 3600;
 
@@ -59,6 +61,9 @@ export default async function BlogListingPage({
 
     return (
         <main className="min-h-screen bg-white">
+            <BreadcrumbSchema
+                items={[{ name: "Blog", url: "https://www.expatcarbuyers.com/blog" }]}
+            />
             {/* Blog Hero */}
             <section className="bg-gray-900 py-24 text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-[#f24026]/10 mix-blend-overlay" />
@@ -91,7 +96,7 @@ export default async function BlogListingPage({
                                     <div className="relative h-64 overflow-hidden bg-gray-100">
                                         {post.cover_image ? (
                                             <img
-                                                src={post.cover_image}
+                                                src={getStorageUrl(post.cover_image)}
                                                 alt={post.title}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                             />

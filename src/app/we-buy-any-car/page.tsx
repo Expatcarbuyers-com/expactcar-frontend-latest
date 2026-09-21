@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 import FAQAccordion from '@/components/home/FAQAccordion';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = {
     title: 'We Buy Any Car in the UAE | Best Car Buyer, Nationwide',
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
 export default function WeBuyAnyCarPage() {
     return (
         <main className="overflow-x-hidden">
+            <BreadcrumbSchema
+                items={[{ name: "We Buy Any Car", url: "https://www.expatcarbuyers.com/we-buy-any-car" }]}
+            />
             {/* ══════════════════════════════════════════════
                 HERO SECTION
             ══════════════════════════════════════════════ */}

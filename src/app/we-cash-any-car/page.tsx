@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const metadata: Metadata = {
     title: 'Cash For Any Car in the UAE | Instant Cash for Cars',
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
 export default function WeCashAnyCarPage() {
     return (
         <main className="overflow-x-hidden">
+            <BreadcrumbSchema
+                items={[{ name: "We Cash Any Car", url: "https://www.expatcarbuyers.com/we-cash-any-car" }]}
+            />
             {/* ══════════════════════════════════════════════
                 HERO SECTION
             ══════════════════════════════════════════════ */}

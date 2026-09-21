@@ -36,3 +36,19 @@ export function injectHeadingIds(html: string, outline: OutlineItem[]): string {
         },
     );
 }
+
+export function getStorageUrl(path?: string | null): string {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) return path;
+    const backendOrigin = (
+        process.env.NEXT_PUBLIC_STORAGE_URL ??
+        process.env.INTERNAL_API_URL?.replace(/\/api\/v1\/?$/, '') ??
+        process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/v1\/?$/, '') ??
+        'https://admin.expatcarbuyers.com'
+    ).replace(/\/$/, '');
+    const cleanPath = path.replace(/^\//, '');
+    if (cleanPath.startsWith('storage/')) {
+        return `${backendOrigin}/${cleanPath}`;
+    }
+    return `${backendOrigin}/storage/${cleanPath}`;
+}

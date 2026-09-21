@@ -1,10 +1,38 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Phone, Mail, MessageCircle, MapPin, Clock, ShieldCheck, Car, ArrowRight, ExternalLink } from 'lucide-react';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+
+export const metadata: Metadata = {
+  title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
+  description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+  alternates: {
+    canonical: 'https://www.expatcarbuyers.com/contact',
+  },
+  openGraph: {
+    title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
+    description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+    url: 'https://www.expatcarbuyers.com/contact',
+    siteName: 'ExpatCarBuyers',
+    images: ['/front/images/our-gurantee-right.webp'],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
+    description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+    images: ['/front/images/our-gurantee-right.webp'],
+  },
+};
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
+      <BreadcrumbSchema
+        items={[{ name: "Contact", url: "https://www.expatcarbuyers.com/contact" }]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

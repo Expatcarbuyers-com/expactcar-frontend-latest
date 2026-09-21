@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
 import { ChevronDown } from 'lucide-react';
 import PriceIncludedSection from '@/components/PriceIncludedSection';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 const TITLE = 'Sell Any Car in Sharjah | Sell Your Car Across Sharjah in 30 Minutes';
 const DESCRIPTION = 'Sell any car in Sharjah to Expat Car Buyers and get market competitive cash deal for your used car. Sell your car in just 30 minutes and get instant payment.';
@@ -29,6 +30,9 @@ export const metadata: Metadata = {
 export default function SharjahPage() {
     return (
         <main className="overflow-x-hidden">
+            <BreadcrumbSchema
+                items={[{ name: "Sell Car Sharjah", url: "https://www.expatcarbuyers.com/sell-car-sharjah" }]}
+            />
             {/* ══════════════════════════════════════════════
                 HERO SECTION
             ══════════════════════════════════════════════ */}

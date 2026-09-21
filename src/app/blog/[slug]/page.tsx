@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import { Calendar, ChevronLeft, Star } from 'lucide-react';
 import { serverFetch } from '@/lib/serverApi';
 import TableOfContents from '@/components/blog/TableOfContents';
-import { injectHeadingIds } from '@/lib/blogUtils';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import { injectHeadingIds, getStorageUrl } from '@/lib/blogUtils';
 
 export const revalidate = 3600;
 
@@ -27,18 +28,30 @@ export async function generateMetadata({
         const { slug } = await params;
         const res = await serverFetch(`/blogs/${slug}`);
         const post = res.data;
+        if (!post) return { title: 'Blog | ExpatCarBuyers' };
+
+        const title = post.meta_title?.trim() || post.title;
+        const description = post.meta_description?.trim() || post.excerpt || post.title;
+        const coverImageUrl = post.cover_image_url || getStorageUrl(post.cover_image);
+
         return {
-            title: `${post.title} | ExpatCarBuyers Blog`,
-            description: post.excerpt || post.title,
+            title: title.includes('ExpatCarBuyers') ? title : `${title} | ExpatCarBuyers`,
+            description,
             alternates: {
                 canonical: `https://www.expatcarbuyers.com/blog/${slug}`,
             },
             openGraph: {
-                title: post.title,
-                description: post.excerpt || post.title,
-                images: post.cover_image ? [{ url: post.cover_image }] : [],
+                title,
+                description,
+                images: coverImageUrl ? [{ url: coverImageUrl }] : ['/front/images/our-gurantee-right.webp'],
                 type: 'article',
                 publishedTime: post.published_at || post.created_at,
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title,
+                description,
+                images: coverImageUrl ? [coverImageUrl] : ['/front/images/our-gurantee-right.webp'],
             },
         };
     } catch {
@@ -70,24 +83,33 @@ export default async function BlogDetailPage({
         notFound();
     }
 
+    const coverImageUrl = post.cover_image_url || getStorageUrl(post.cover_image);
+
     const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
-        headline: post.title,
-        description: post.excerpt || post.title,
-        image: post.cover_image || undefined,
+        headline: post.meta_title || post.title,
+        description: post.meta_description || post.excerpt || post.title,
+        image: coverImageUrl || undefined,
         datePublished: post.published_at || post.created_at,
         dateModified: post.updated_at,
         author: { '@type': 'Organization', name: 'ExpatCarBuyers' },
         publisher: {
             '@type': 'Organization',
             name: 'ExpatCarBuyers',
-            logo: { '@type': 'ImageObject', url: 'https://www.expatcarbuyers.com/front/images/logo.png' },
+            logo: { '@type': 'ImageObject', url: 'https://www.expatcarbuyers.com/front/images/logo.webp' },
         },
     };
 
     return (
         <>
+            <BreadcrumbSchema
+                items={[
+                    { name: 'Blog', url: 'https://www.expatcarbuyers.com/blog' },
+                    { name: post.title, url: `https://www.expatcarbuyers.com/blog/${post.slug || slug}` },
+                ]}
+            />
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -96,7 +118,7 @@ export default async function BlogDetailPage({
             <main className="min-h-screen bg-gray-50 pb-24">
                 <article>
                     <header className="bg-white border-b border-gray-100 pt-32 pb-20">
-                        <div className="container mx-auto px-6 max-w-4xl">
+                        <div className="container mx-auto px-4 sm:px-6 max-w-5xl lg:max-w-6xl">
                             <a href="/blog" className="inline-flex items-center gap-2 text-[#f24026] font-bold mb-8 hover:gap-3 transition-all">
                                 <ChevronLeft className="w-5 h-5" /> Back to Blog
                             </a>
@@ -110,7 +132,7 @@ export default async function BlogDetailPage({
                                     {new Date(post.published_at || post.created_at).toLocaleDateString()}
                                 </span>
                             </div>
-                            <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-8">
+                            <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 leading-[1.15] mb-8 break-words">
                                 {post.title}
                             </h1>
                             <div className="flex items-center py-8 border-y border-gray-50">
@@ -127,11 +149,11 @@ export default async function BlogDetailPage({
                         </div>
                     </header>
 
-                    <div className="container mx-auto px-6 max-w-4xl mt-16">
-                        <div className="bg-white p-8 lg:p-16 rounded-[3rem] shadow-xl shadow-gray-200/50 border border-gray-100">
-                            {post.cover_image && (
+                    <div className="container mx-auto px-4 sm:px-6 max-w-5xl lg:max-w-6xl mt-12">
+                        <div className="bg-white p-6 sm:p-10 lg:p-14 rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100">
+                            {coverImageUrl && (
                                 <div className="rounded-[2rem] overflow-hidden mb-12 shadow-lg">
-                                    <img src={post.cover_image} alt={post.title} className="w-full h-auto" />
+                                    <img src={coverImageUrl} alt={post.title} className="w-full h-auto object-cover max-h-[550px]" />
                                 </div>
                             )}
                             <TableOfContents outline={post.outline ?? []} />
@@ -150,7 +172,7 @@ export default async function BlogDetailPage({
                             />
                         </div>
 
-                        <div className="mt-16 bg-[#f24026] rounded-[3rem] p-12 text-white overflow-hidden relative shadow-2xl shadow-[#f24026]/20">
+                        <div className="mt-12 bg-[#f24026] rounded-[2.5rem] p-8 sm:p-12 text-white overflow-hidden relative shadow-2xl shadow-[#f24026]/20">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
                             <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
                                 <div className="flex-1">
@@ -167,30 +189,33 @@ export default async function BlogDetailPage({
 
                 {/* Related Articles */}
                 {related.length > 0 && (
-                    <section className="container mx-auto px-6 max-w-5xl mt-24">
+                    <section className="container mx-auto px-4 sm:px-6 max-w-5xl lg:max-w-6xl mt-20">
                         <h3 className="text-2xl font-extrabold text-gray-900 mb-8 flex items-center gap-3">
                             <Star className="w-6 h-6 text-[#f24026] fill-current" /> Related Articles
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {related.map((p: any) => (
-                                <a
-                                    key={p.id}
-                                    href={`/blog/${p.slug}`}
-                                    className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all flex flex-col"
-                                >
-                                    {p.cover_image && (
-                                        <div className="h-48 overflow-hidden">
-                                            <img src={p.cover_image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            {related.map((p: any) => {
+                                const relCover = p.cover_image_url || getStorageUrl(p.cover_image);
+                                return (
+                                    <a
+                                        key={p.id}
+                                        href={`/blog/${p.slug}`}
+                                        className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all flex flex-col"
+                                    >
+                                        {relCover && (
+                                            <div className="h-48 overflow-hidden">
+                                                <img src={relCover} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                            </div>
+                                        )}
+                                        <div className="p-6 flex-1">
+                                            <h4 className="font-bold text-gray-900 group-hover:text-[#f24026] transition-colors line-clamp-2">
+                                                {p.title}
+                                            </h4>
+                                            <p className="text-gray-500 text-sm mt-2 line-clamp-2">{p.excerpt}</p>
                                         </div>
-                                    )}
-                                    <div className="p-6 flex-1">
-                                        <h4 className="font-bold text-gray-900 group-hover:text-[#f24026] transition-colors line-clamp-2">
-                                            {p.title}
-                                        </h4>
-                                        <p className="text-gray-500 text-sm mt-2 line-clamp-2">{p.excerpt}</p>
-                                    </div>
-                                </a>
-                            ))}
+                                    </a>
+                                );
+                            })}
                         </div>
                     </section>
                 )}

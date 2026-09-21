@@ -183,6 +183,22 @@ export async function middleware(request: NextRequest) {
   const searchParams = url.searchParams;
   const rawQuery = url.search.toLowerCase();
 
+  // 0. Instantly reject external gambling / slot spam requests (e.g. slothoki, gacor)
+  if (
+    rawPathname.includes('slothoki') ||
+    rawQuery.includes('slothoki') ||
+    rawQuery.includes('gacor')
+  ) {
+    return new NextResponse(renderBranded410Page(), {
+      status: 410,
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      },
+    });
+  }
+
   // Handle legacy uploadedimages paths (dead WordPress image uploads)
   if (pathname.startsWith('/uploadedimages/') || pathname === '/uploadedimages') {
     return new NextResponse(renderBranded410Page(), {

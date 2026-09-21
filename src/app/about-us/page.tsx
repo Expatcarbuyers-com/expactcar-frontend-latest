@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Target, Users, ShieldCheck, Heart } from 'lucide-react';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 const TITLE = 'About ExpatCarBuyers | The Trusted Way to Sell Your Car in UAE';
 const DESCRIPTION = 'Learn about ExpatCarBuyers, the leading car buying service in Dubai & UAE, and our mission to make selling your car fast, safe, and transparent.';
@@ -64,6 +65,9 @@ const values = [
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
+      <BreadcrumbSchema
+        items={[{ name: "About Us", url: "https://www.expatcarbuyers.com/about-us" }]}
+      />
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 overflow-hidden bg-gray-900 text-white">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f24026]/10 -skew-x-12 translate-x-1/4" />

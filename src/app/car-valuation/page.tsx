@@ -1,6 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ValuationFormServer from '@/components/valuation-form/ValuationFormServer';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+
 const TITLE = 'Free Car Valuation in Dubai & UAE | Instant Online Estimate';
 const DESCRIPTION = 'Find out what your car is really worth in under a minute. Free, no-obligation valuation with no hidden catches — sell with confidence.';
 
@@ -30,6 +32,9 @@ export const metadata: Metadata = {
 export default function EvaluatePage() {
     return (
         <main className="overflow-x-hidden">
+            <BreadcrumbSchema
+                items={[{ name: "Car Valuation", url: "https://www.expatcarbuyers.com/car-valuation" }]}
+            />
             {/* ══════════════════════════════════════════════
                 HERO SECTION
             ══════════════════════════════════════════════ */}

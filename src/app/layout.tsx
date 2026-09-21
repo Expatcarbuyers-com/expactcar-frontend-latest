@@ -5,6 +5,7 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 const SITE_URL = "https://www.expatcarbuyers.com";
 const DEFAULT_TITLE = "Sell My Car in Dubai | Sell Any Car for Cash | ExpatCarBuyers";
@@ -85,6 +86,7 @@ export default function RootLayout({
                 <script async defer src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6Le3JZ0tAAAAAIwnseCz0GozkK0HEahCdzl8BRCn'}`} />
             </head>
             <body className="antialiased" suppressHydrationWarning>
+                <OrganizationSchema />
                 <Providers>
                     <Header />
                     <main>

@@ -48,6 +48,7 @@ export default function ContactPage() {
               '@type': 'PostalAddress',
               streetAddress: 'Sheikh Zayed Road, Al Quoz',
               addressLocality: 'Dubai',
+              postalCode: '00000',
               addressCountry: 'AE',
             },
             openingHoursSpecification: [

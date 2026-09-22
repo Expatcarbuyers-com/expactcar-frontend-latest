@@ -21,6 +21,7 @@ const organizationSchema = {
     streetAddress: "Office No. G17, Al Asmawi Building, Sheikh Zayed Road",
     addressLocality: "Dubai",
     addressRegion: "Dubai",
+    postalCode: "00000",
     addressCountry: "AE",
   },
   areaServed: [

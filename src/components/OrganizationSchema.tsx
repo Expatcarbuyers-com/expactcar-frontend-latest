@@ -13,7 +13,6 @@ const organizationSchema = {
   image: "https://www.expatcarbuyers.com/front/images/office-sheikh-zayed-road.jpg",
   description:
     "Sell your car in Dubai and across the UAE with Expat Car Buyers, an RTA-approved car buying service offering free vehicle inspections, instant online valuations, bank finance settlement, and cash payment within 30 minutes.",
-  priceRange: "AED",
   telephone: "+971561774555",
   email: "contact@expatcarbuyers.com",
   address: {
@@ -21,7 +20,6 @@ const organizationSchema = {
     streetAddress: "Office No. G17, Al Asmawi Building, Sheikh Zayed Road",
     addressLocality: "Dubai",
     addressRegion: "Dubai",
-    postalCode: "00000",
     addressCountry: "AE",
   },
   areaServed: [
@@ -49,11 +47,6 @@ const organizationSchema = {
       closes: "22:00",
     },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.7",
-    reviewCount: "2467",
-  },
   sameAs: [
     "https://www.facebook.com/ExpatCarBuyers/",
     "https://www.instagram.com/expatcarbuyers/",

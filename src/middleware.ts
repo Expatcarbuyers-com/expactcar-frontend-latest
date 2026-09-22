@@ -183,12 +183,22 @@ export async function middleware(request: NextRequest) {
   const searchParams = url.searchParams;
   const rawQuery = url.search.toLowerCase();
 
-  // 0. Instantly reject external gambling / slot spam requests (e.g. slothoki, gacor)
-  if (
+  // 0. Instantly reject external gambling / slot spam requests (slothoki, garudax, jepex, mdg188, gacor, etc.)
+  const isGamblingSpam =
     rawPathname.includes('slothoki') ||
     rawQuery.includes('slothoki') ||
-    rawQuery.includes('gacor')
-  ) {
+    rawPathname.includes('garudax') ||
+    rawQuery.includes('garudax') ||
+    rawPathname.includes('jepex') ||
+    rawQuery.includes('jepex') ||
+    rawPathname.includes('mdg188') ||
+    rawQuery.includes('mdg188') ||
+    rawQuery.includes('gacor') ||
+    rawQuery.includes('judi') ||
+    rawQuery.includes('slot777') ||
+    rawQuery.includes('slot88');
+
+  if (isGamblingSpam) {
     return new NextResponse(renderBranded410Page(), {
       status: 410,
       headers: {

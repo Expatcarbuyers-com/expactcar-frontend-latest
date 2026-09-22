@@ -32,34 +32,6 @@ export const metadata: Metadata = {
     },
 };
 
-const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'ExpatCarBuyers',
-    url: 'https://www.expatcarbuyers.com',
-    logo: 'https://www.expatcarbuyers.com/front/images/logo.png',
-    description: 'We buy any car in Dubai — instant valuation, free inspection, cash in 30 minutes.',
-    areaServed: ['Dubai'],
-    telephone: '+971561774555',
-    email: 'contact@expatcarbuyers.com',
-    address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'office No. G17, Al Asmawi Building',
-        addressLocality: 'Sheikh Zayed Road',
-        addressRegion: 'Dubai',
-        addressCountry: 'United Arab Emirates',
-    },
-    aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.7',
-        ratingCount: '2467',
-    },
-    sameAs: [
-        'https://www.facebook.com/ExpatCarBuyers/',
-        'https://www.instagram.com/expatcarbuyers/',
-        'https://twitter.com/expatcarbuyers',
-    ],
-};
 
 /* ── Inline SVGs ────────────────────────────────────────────── */
 const CheckIcon = () => (
@@ -129,10 +101,6 @@ const guaranteeItems = [
 export default function Home() {
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-            />
 
             {/* ══════════════════════════════════════════════
                 HERO SECTION

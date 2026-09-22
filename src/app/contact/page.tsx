@@ -4,15 +4,19 @@ import type { Metadata } from 'next';
 import { Phone, Mail, MessageCircle, MapPin, Clock, ShieldCheck, Car, ArrowRight, ExternalLink } from 'lucide-react';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
+const TITLE = 'Contact Us | Sell Your Car in UAE - ExpatCarBuyers';
+const DESCRIPTION =
+  'Get in touch with ExpatCarBuyers to sell your car, get a free valuation, or book an appointment. Call, WhatsApp, or visit our Dubai office — we respond within 15 minutes.';
+
 export const metadata: Metadata = {
-  title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
-  description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: {
     canonical: 'https://www.expatcarbuyers.com/contact',
   },
   openGraph: {
-    title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
-    description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+    title: TITLE,
+    description: DESCRIPTION,
     url: 'https://www.expatcarbuyers.com/contact',
     siteName: 'ExpatCarBuyers',
     images: ['/front/images/our-gurantee-right.webp'],
@@ -21,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact ExpatCarBuyers | Sell My Car in Dubai & UAE',
-    description: 'Get in touch with ExpatCarBuyers. Visit our Dubai inspection center on Sheikh Zayed Road or call/WhatsApp +971 56 177 4555 for instant valuation.',
+    title: TITLE,
+    description: DESCRIPTION,
     images: ['/front/images/our-gurantee-right.webp'],
   },
 };

@@ -160,7 +160,7 @@ export default function AboutPage() {
               <a href="/" className="px-10 py-4 bg-white text-[#f24026] font-extrabold rounded-2xl hover:bg-gray-100 transition-all shadow-xl">
                 Get Free Valuation
               </a>
-              <a href="/contact" className="px-10 py-4 bg-[#d6351f] text-white font-extrabold rounded-2xl hover:bg-[#b82c19] transition-all">
+              <a href="/contact-us" className="px-10 py-4 bg-[#d6351f] text-white font-extrabold rounded-2xl hover:bg-[#b82c19] transition-all">
                 Contact Our Team
               </a>
             </div>

@@ -17,7 +17,7 @@ const navItems = [
     { id: 'evaluate', label: 'EVALUATE YOUR CAR', href: '/car-valuation' },
     { id: 'about',    label: 'ABOUT US',          href: '/about-us' },
     { id: 'blog',     label: 'BLOGS',             href: '/blog' },
-    { id: 'contact',  label: 'CONTACT',           href: '/contact' },
+    { id: 'contact',  label: 'CONTACT',           href: '/contact-us' },
 ];
 
 /* ─── Icons ──────────────────────────────────────────────────── */

@@ -6,7 +6,7 @@ import BlogSearchInput from '@/components/blog/BlogSearchInput';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { getStorageUrl } from '@/lib/blogUtils';
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
     title: 'Car Buying Guide & News | ExpatCarBuyers Blog',
@@ -49,7 +49,7 @@ export default async function BlogListingPage({
     try {
         const params = new URLSearchParams({ page });
         if (q) params.set('search', q);
-        const res = await serverFetch(`/blogs?${params.toString()}`);
+        const res = await serverFetch(`/blogs?${params.toString()}`, 60);
         posts = res.data.data ?? [];
         meta = res.data.meta ?? {};
     } catch {

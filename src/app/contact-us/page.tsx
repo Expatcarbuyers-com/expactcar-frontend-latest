@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
-    canonical: 'https://www.expatcarbuyers.com/contact',
+    canonical: 'https://www.expatcarbuyers.com/contact-us',
   },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: 'https://www.expatcarbuyers.com/contact',
+    url: 'https://www.expatcarbuyers.com/contact-us',
     siteName: 'ExpatCarBuyers',
     images: ['/front/images/our-gurantee-right.webp'],
     locale: 'en_US',
@@ -35,7 +35,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <BreadcrumbSchema
-        items={[{ name: "Contact", url: "https://www.expatcarbuyers.com/contact" }]}
+        items={[{ name: "Contact", url: "https://www.expatcarbuyers.com/contact-us" }]}
       />
       <script
         type="application/ld+json"

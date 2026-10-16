@@ -5,12 +5,12 @@ export const metadata: Metadata = {
     description:
         'Get in touch with ExpatCarBuyers to sell your car, get a free valuation, or book an appointment. Call, WhatsApp, or visit our Dubai office — we respond within 15 minutes.',
     alternates: {
-        canonical: 'https://www.expatcarbuyers.com/contact',
+        canonical: 'https://www.expatcarbuyers.com/contact-us',
     },
     openGraph: {
         title: 'Contact Us | Sell Your Car in UAE – ExpatCarBuyers',
         description: 'Get in touch with ExpatCarBuyers. Call, WhatsApp, or visit our Dubai office.',
-        url: 'https://www.expatcarbuyers.com/contact',
+        url: 'https://www.expatcarbuyers.com/contact-us',
         siteName: 'ExpatCarBuyers',
         images: ['/front/images/our-gurantee-right.webp'],
         locale: 'en_US',

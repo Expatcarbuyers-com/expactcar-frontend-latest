@@ -56,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
-      url: `${SITE_URL}/contact`,
+      url: `${SITE_URL}/contact-us`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
@@ -76,8 +76,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const res = await serverFetch('/blogs?per_page=100');
-    const posts: any[] = res.data?.data ?? [];
+    // The API caps per_page at 50 (larger values are rejected with 422), so walk every page.
+    const posts: any[] = [];
+    let page = 1;
+    let lastPage = 1;
+    do {
+      const res = await serverFetch(`/blogs?per_page=50&page=${page}`);
+      posts.push(...(res.data?.data ?? []));
+      lastPage = Number(res.data?.last_page ?? 1);
+      page++;
+    } while (page <= lastPage && page <= 20);
 
     const blogRoutes: MetadataRoute.Sitemap = posts.map((post: any) => ({
       url: `${SITE_URL}/blog/${post.slug}`,

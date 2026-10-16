@@ -11,7 +11,7 @@ const VALID_SITEMAP_ROUTES = new Set([
   '/we-cash-any-car',
   '/blog',
   '/about-us',
-  '/contact',
+  '/contact-us',
   '/privacy-policy',
   '/terms-conditions',
   '/robots.txt',
@@ -63,9 +63,47 @@ const API_BASE = (
   'http://localhost:8000/api/v1'
 ).replace(/\/$/, '');
 
-// In-memory cache for blog slug validation to maintain ultra-fast middleware response times
-const knownValidBlogSlugs = new Set<string>();
-const knownGoneBlogSlugs = new Set<string>();
+// Pages permanently retired at the client's request (contact page moved to /contact-us)
+const GONE_PAGE_PATHS = new Set([
+  '/contact',
+]);
+
+// In-memory cache for blog slug validation to maintain ultra-fast middleware response times.
+// Entries expire: a slug that 404s before its publish time (or while a post is being
+// edited) must not stay "gone" until the next server restart.
+const VALID_SLUG_TTL_MS = 5 * 60 * 1000;
+const GONE_SLUG_TTL_MS = 60 * 1000;
+const knownValidBlogSlugs = new Map<string, number>(); // slug -> expiry timestamp
+const knownGoneBlogSlugs = new Map<string, number>();  // slug -> expiry timestamp
+
+function isCached(cache: Map<string, number>, slug: string): boolean {
+  const expiresAt = cache.get(slug);
+  if (expiresAt === undefined) return false;
+  if (expiresAt <= Date.now()) {
+    cache.delete(slug);
+    return false;
+  }
+  return true;
+}
+
+function remember(cache: Map<string, number>, slug: string, ttlMs: number): void {
+  // Simple bound so crawlers hitting random slugs can't grow memory without limit
+  if (cache.size >= 5000) cache.clear();
+  cache.set(slug, Date.now() + ttlMs);
+}
+
+// 410 for a blog slug that does not exist *right now*. Must not be cached by browsers
+// or Cloudflare: the same slug can become a live post moments later.
+function blogSlugGoneResponse(): NextResponse {
+  return new NextResponse(renderBranded410Page(), {
+    status: 410,
+    headers: {
+      'X-Robots-Tag': 'noindex, nofollow, noarchive',
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store, max-age=0',
+    },
+  });
+}
 
 function renderBranded410Page(): string {
   return `<!DOCTYPE html>
@@ -221,8 +259,9 @@ export async function middleware(request: NextRequest) {
     });
   }
 
-  // Handle explicitly gone blog paths or legacy pagination URLs (/blog/page/*)
+  // Handle explicitly gone pages, gone blog paths or legacy pagination URLs (/blog/page/*)
   if (
+    GONE_PAGE_PATHS.has(pathname) ||
     GONE_BLOG_PATHS.has(pathname) ||
     pathname === '/blog/page' ||
     pathname.startsWith('/blog/page/')
@@ -252,50 +291,30 @@ export async function middleware(request: NextRequest) {
       });
     }
 
-    if (knownGoneBlogSlugs.has(slug)) {
-      return new NextResponse(renderBranded410Page(), {
-        status: 410,
-        headers: {
-          'X-Robots-Tag': 'noindex, nofollow, noarchive',
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'public, max-age=86400, s-maxage=86400',
-        },
-      });
+    if (isCached(knownGoneBlogSlugs, slug)) {
+      return blogSlugGoneResponse();
     }
 
-    if (!knownValidBlogSlugs.has(slug)) {
+    if (!isCached(knownValidBlogSlugs, slug)) {
       try {
         const res = await fetch(`${API_BASE}/blogs/${encodeURIComponent(slug)}`, {
           headers: { Accept: 'application/json' },
           signal: AbortSignal.timeout(3000),
+          cache: 'no-store',
         });
 
         if (res.status === 404) {
-          knownGoneBlogSlugs.add(slug);
-          return new NextResponse(renderBranded410Page(), {
-            status: 410,
-            headers: {
-              'X-Robots-Tag': 'noindex, nofollow, noarchive',
-              'Content-Type': 'text/html; charset=utf-8',
-              'Cache-Control': 'public, max-age=86400, s-maxage=86400',
-            },
-          });
+          remember(knownGoneBlogSlugs, slug, GONE_SLUG_TTL_MS);
+          return blogSlugGoneResponse();
         }
 
         if (res.ok) {
           const data = await res.json();
           if (data && data.success && data.data) {
-            knownValidBlogSlugs.add(slug);
+            remember(knownValidBlogSlugs, slug, VALID_SLUG_TTL_MS);
           } else {
-            knownGoneBlogSlugs.add(slug);
-            return new NextResponse(renderBranded410Page(), {
-              status: 410,
-              headers: {
-                'X-Robots-Tag': 'noindex, nofollow, noarchive',
-                'Content-Type': 'text/html; charset=utf-8',
-                'Cache-Control': 'public, max-age=86400, s-maxage=86400',
-              },
-            });
+            remember(knownGoneBlogSlugs, slug, GONE_SLUG_TTL_MS);
+            return blogSlugGoneResponse();
           }
         }
       } catch {

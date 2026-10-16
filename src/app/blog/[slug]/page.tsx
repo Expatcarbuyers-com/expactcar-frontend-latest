@@ -2,16 +2,33 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Calendar, ChevronLeft, Star } from 'lucide-react';
-import { serverFetch } from '@/lib/serverApi';
+import { serverFetch, isApiNotFound } from '@/lib/serverApi';
 import TableOfContents from '@/components/blog/TableOfContents';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { injectHeadingIds, getStorageUrl } from '@/lib/blogUtils';
 
-export const revalidate = 3600;
+// Short window so a published or edited post goes live within about a minute.
+export const revalidate = 60;
+const BLOG_REVALIDATE = 60;
+
+// Returns null only when the API says the post does not exist (404). Any other
+// failure (timeout, 5xx, DB cold start) is rethrown on purpose: Next.js then keeps
+// serving the last successfully generated page, instead of caching a not-found
+// page, which carries a robots "noindex" tag and the homepage's title/OG tags.
+async function getPost(slug: string): Promise<any | null> {
+    try {
+        const res = await serverFetch(`/blogs/${slug}`, BLOG_REVALIDATE);
+        return res.data ?? null;
+    } catch (err) {
+        if (isApiNotFound(err)) return null;
+        throw err;
+    }
+}
 
 export async function generateStaticParams() {
     try {
-        const res = await serverFetch('/blogs?per_page=100');
+        // API caps per_page at 50; any other post is rendered on first request.
+        const res = await serverFetch('/blogs?per_page=50', BLOG_REVALIDATE);
         const posts: any[] = res.data.data ?? [];
         return posts.map((p: any) => ({ slug: p.slug }));
     } catch {
@@ -24,39 +41,35 @@ export async function generateMetadata({
 }: {
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-    try {
-        const { slug } = await params;
-        const res = await serverFetch(`/blogs/${slug}`);
-        const post = res.data;
-        if (!post) return { title: 'Blog | ExpatCarBuyers' };
+    const { slug } = await params;
+    const post = await getPost(slug);
+    if (!post) notFound();
 
-        const title = post.meta_title?.trim() || post.title;
-        const description = post.meta_description?.trim() || post.excerpt || post.title;
-        const coverImageUrl = post.cover_image_url || getStorageUrl(post.cover_image);
+    const title = post.meta_title?.trim() || post.title;
+    const description = post.meta_description?.trim() || post.excerpt || post.title;
+    const coverImageUrl = post.cover_image_url || getStorageUrl(post.cover_image);
 
-        return {
-            title: title.includes('ExpatCarBuyers') ? title : `${title} | ExpatCarBuyers`,
+    return {
+        title: title.includes('ExpatCarBuyers') ? title : `${title} | ExpatCarBuyers`,
+        description,
+        alternates: {
+            canonical: `https://www.expatcarbuyers.com/blog/${slug}`,
+        },
+        openGraph: {
+            title,
             description,
-            alternates: {
-                canonical: `https://www.expatcarbuyers.com/blog/${slug}`,
-            },
-            openGraph: {
-                title,
-                description,
-                images: coverImageUrl ? [{ url: coverImageUrl }] : ['/front/images/our-gurantee-right.webp'],
-                type: 'article',
-                publishedTime: post.published_at || post.created_at,
-            },
-            twitter: {
-                card: 'summary_large_image',
-                title,
-                description,
-                images: coverImageUrl ? [coverImageUrl] : ['/front/images/our-gurantee-right.webp'],
-            },
-        };
-    } catch {
-        return { title: 'Blog | ExpatCarBuyers' };
-    }
+            url: `https://www.expatcarbuyers.com/blog/${slug}`,
+            images: coverImageUrl ? [{ url: coverImageUrl }] : ['/front/images/our-gurantee-right.webp'],
+            type: 'article',
+            publishedTime: post.published_at || post.created_at,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: coverImageUrl ? [coverImageUrl] : ['/front/images/our-gurantee-right.webp'],
+        },
+    };
 }
 
 export default async function BlogDetailPage({
@@ -66,22 +79,19 @@ export default async function BlogDetailPage({
 }) {
     const { slug } = await params;
 
-    let post: any = null;
-    let related: any[] = [];
-    let processedContent = '';
+    const post = await getPost(slug);
+    if (!post) notFound();
 
+    // Related articles are optional — a failure here must never take the article down.
+    let related: any[] = [];
     try {
-        const [postRes, relatedRes] = await Promise.all([
-            serverFetch(`/blogs/${slug}`),
-            serverFetch('/blogs?per_page=2'),
-        ]);
-        post = postRes.data;
-        if (!post) notFound();
-        related = (relatedRes.data.data ?? []).filter((p: any) => p.slug !== slug);
-        processedContent = injectHeadingIds(post.content ?? '', post.outline ?? []);
+        const relatedRes = await serverFetch('/blogs?per_page=2', BLOG_REVALIDATE);
+        related = (relatedRes.data?.data ?? []).filter((p: any) => p.slug !== slug);
     } catch {
-        notFound();
+        related = [];
     }
+
+    const processedContent = injectHeadingIds(post.content ?? '', post.outline ?? []);
 
     const coverImageUrl = post.cover_image_url || getStorageUrl(post.cover_image);
 
